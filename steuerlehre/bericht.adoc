@@ -1,3 +1,5 @@
+:source-highlighter: rouge
+:imagesdir: img
 = 2. Steuerrecht
 
 == 2.a Aufgabenbeschreibung
@@ -8,7 +10,8 @@ Um eine natürliche Satzstruktur zu wahren, muss der Text dabei unterschiedliche
 Die Wertebereiche der Aufgaben müssen sich in einem realistischen Bereich bewegen, um nahezu an die Realtität zu kommen, sodass sich der Text umso mehr 'real' anfühlt.
 
 === Anforderungen
-Aus diesen Gegebenheiten ergeben sich folgende Anforderungen an die Software:
+Aus diesen Gegebenheiten ergeben sich folgende Anforderungen an die Software
+
 . Zufällige Generierung der Summen und Sachverhalte
 . Guter Lesefluss in der Aufgabe durch unterschiedliche Satzstrukturen
 . Generieren der Aufgabe und der Lösung
@@ -30,9 +33,70 @@ Meine Wahl für das Framework für die REST-API fiel, wie beschrieben, auf FastA
 Das Frontend habe ich aufgrund des Studiums mit Vuejs programmiert. Ich konnte hier bereits einige Erfahrungen in diesem Semestern sammeln und da ich die Lernkurve nicht als zu hoch empfand, habe ich mich für dieses Framework entschieden. Zuerst nur in einzelnen Aspekten, da aber die Aufgabenlösung und Anzeige eine dynamische Webseite erfordert, habe ich das komplette Frontend (vorher Flask mit Templates) auf komplett Vuejs umgestellt. Vuejs spricht je nach Funktionalität die REST-Endpunkte an um, im JSON Format, mit dem Server zu interagieren.
 
 === Implementierung der Anforderungen
-Um die oben genanten Anforderungen und wichtige Details umzusetzen, möchte ich die Software und genutzte Konzepte vollumfassend nachfolgend erklären.
+Um die oben genanten Anforderungen und wichtige Details umzusetzen, möchte ich die Software und genutzte Konzepte vollumfassend nachfolgend erklären. 
 
-==== 
+==== Angewendete Konzepte
+Um in folgenden Absätzen Fragen zu klären, erleutere ich zunächst, welche Konzepte und Ideen grundlegende Funktionalitäten in der Software umsetzen. Da wir im Steuerrecht unterschiedliche Sachverhalte pro Aufgabe haben, braucht es eine Datenstruktur für die Sachverhalte. Um diese dann zufällig auszuzwählen bzw. aneinander zu hängen ist eine weitere Struktur von Nutzen, die diese Funktion übernimmt. 
+
+===== Sachverhalt (Case)
+Ein Sachverhalt, nachfolgend auch Case gennant, ist die Repräsentation der notwendigen Informationen zu einem steuerlichen Sachverhalt. Diese Informationen sind in meinen Augen
+
+. Name des Sachverhalts
+. Art des Sachverhalts (Gehalt, Vermietung, Werbungskosten, Beteiligung,...)
+. Verb das zum Sachverhalt gehört
+. Subjekt / handelnde Person im Sachverhalt
+. Zugehörige Summe
+
+Diese Informationen werden pro Sachverhalt einzeln gespeichert und durch einen Klasse (case.py) abgebildet. Für jeden Sachverhalt werden neuen Klassen instanziiert und mit entsrpechenden Werten gefüllt, welche auch nachträglich durch Getter und Setter manipuliert / ausgelesen werden können.
+Die Klasse hält die notwendigen Infromationen wie folgt
+[source,python]
+____
+class Case:
+    def __init__(self, name="", subject="", verb="", object="", number=0) -> None:
+        self.name = name
+        self.subject = subject
+        self.verb = verb
+        self.object = object
+        self.number = number
+____
+
+===== Pool / Auswahl an Sachverhalten (Nodepool)
+Um alle instanziierten Sachverhalte in einer Datenstruktur halten zu können, benötigt es eine, dem Case übergeordnete, Datenstruktur. Zuerst habe ich versucht, auch im Hinblick auf die Generierung, die Datenstruktur als Graph aufzubauen, bei der jeder Case ein eigener Unterknoten und die Blätter des Knotens die Informationen zum Case sind. Da dieser Ansatz im Aufbau nicht sehr intuitiv war, habe ich mich im Nachhinein für eine "Pool" entscheiden. Dieser Pool hält eine Liste an Sachverhalten und stellt Methoden bereit um gezielt oder zufällig Sachverhalte aus dem Pool auszuwählen, aber auch einzelne Sachverhalte hinzuzufügen oder zu löschen. Diese Funktionalität bildet die Klasse nodepool.py ab, welche ein direktes Zusammenspiel mit der case.py Klasse bildet. 
+[source, python]
+____
+class NodePool:
+    def __init__(self, name: str) -> None:
+        self.name = name
+        self.nodes: List[Case] = []
+____
+
+===== Natürliche Sprache (Mask-Filling)
+Die Cases stellen für jeden Sachverhalt Informationen bereit, die unbedingt in der Formulierung vorkommen müssen, woraus sich einzelne Satzbausteine ergeben, welche bei der Satzgenerierung angewendet werden müssen. Jedoch bleiben dann Trennwörter und andere "füllende" Satzbausteine übrig, welche nur mit viel Aufwand fest definiert werden können. Um diese "Lücken" zu schließen und unterschiedliche Satzstrukturen ausbilden zu können, habe ich mir das Konzept des Mask-Filling zu nutze gemacht.
+
+==== Ordnerstruktur
+Zuerst ist es wichtig die Struktur des Projektes näher zu beleuchten.
+
+===== REST-API
+Die REST-API befindet sich im 'backend' Ordner. Hier gibt es die Subordner und Dateien:
+
+:image:backend-folder.png[]
+
+* `generate_tasks.py` -> Datei, welche Logik zur Generierung der Aufgaben enthält
+* `generator_strategie.py` -> 
+* `main.py` -> FastAPI-Datei, welche gestartet wird und Hauptfunktionen enthält
+* `/json` -> Ablage JSON-Dateien zum Test
+* `/library` -> Bibliotheken für andere Module
+* `/library/nodepool/case.py` -> Klasse, welche einen Sachverhalt repräsentiert
+* `/library/nodepool/nodepool.py` -> Klasse, welche einen Pool aus Sachverhalten repräsentiert, welche zufällig gewählt werden
+* `/library/dependencies.py` -> Auflösen und Generieren aller Einnahmen / Ausgaben Fälle
+* `/library/laws.py` -> Festgelegte, gesetzliche Grundlagen der Fälle
+* `/library/numbers.py` -> Wertebereiche der Fälle und Rundungsregeln
+* `/library/sentenceparts.py` -> Satzbausteine für die einzelnen Fälle
+* `/library/solution.py` -> Klasse, welche eine Lösung für einen Fall darstellt
+* `/library/task.py` -> Klasse, welche eine Aufgabe mit den einzelnen Fällen darstellt
+* `/library/variations.py` -> Stellt Funktionen des Sprachmodells bereit und bildet die unterschiedlichen Formulierungen für einen Sachverhalt
+
+==== Generierung der Aufgaben
 
 
 
