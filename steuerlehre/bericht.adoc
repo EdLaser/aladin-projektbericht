@@ -1,4 +1,4 @@
-:source-highlighter: rouge
+:source-highlighter: highlight.js
 :imagesdir: img
 = 2. Steuerrecht
 
@@ -71,7 +71,13 @@ class NodePool:
 ____
 
 ===== Natürliche Sprache (Mask-Filling)
-Die Cases stellen für jeden Sachverhalt Informationen bereit, die unbedingt in der Formulierung vorkommen müssen, woraus sich einzelne Satzbausteine ergeben, welche bei der Satzgenerierung angewendet werden müssen. Jedoch bleiben dann Trennwörter und andere "füllende" Satzbausteine übrig, welche nur mit viel Aufwand fest definiert werden können. Um diese "Lücken" zu schließen und unterschiedliche Satzstrukturen ausbilden zu können, habe ich mir das Konzept des Mask-Filling zu nutze gemacht.
+Die Cases stellen für jeden Sachverhalt Informationen bereit, die unbedingt in der Formulierung vorkommen müssen, woraus sich einzelne Satzbausteine ergeben, welche bei der Satzgenerierung angewendet werden müssen. Jedoch bleiben dann Trennwörter und andere "füllende" Satzbausteine übrig, welche nur mit viel Aufwand fest definiert werden können. Um diese "Lücken" zu schließen und unterschiedliche Satzstrukturen ausbilden zu können, habe ich mir das Konzept des Mask-Filling zu nutze gemacht. Mask-Filling lässt sich nutzen, in dem in den Sätzen Platzhalter, sogenannte "MASKS", eingebaut werden, welche nachträglich von einem Sprachmodel gefüllt werden. Das Sprachmodel teilt den Satz in Tokens auf und sucht aufgrund seiner vorhandenen Daten nach einem möglichst passenden Ersatz für die Maske im Satz, um die Maske danach zu ersetzen. Dabei ist zu beachten, dass das Sprachmodel *nicht* auf steuerliche Sachverhalte trainiert wurde und es daher auch öfter dazu kommen kann, dass die Trennwörter nicht in den Use-Case passen.
+
+.Ungefüllte Masken im Satz
+image:mask-beispiel.png[]
+
+.Nachträglich gefüllte Masken
+image:masken-gefüllt.png[]
 
 ==== Ordnerstruktur
 Zuerst ist es wichtig die Struktur des Projektes näher zu beleuchten.
