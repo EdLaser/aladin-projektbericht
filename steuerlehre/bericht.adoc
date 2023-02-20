@@ -16,6 +16,23 @@ Aus diesen Gegebenheiten ergeben sich folgende Anforderungen an die Software:
 . Trennung der Generierung und Lösung
 
 == Technische Umsetzung
+=== Allgemeine Architektur
+Die Software bildet besteht aus einem Server, welcher die Aufgaben zentral verwaltet, generiert, löst und die Lösungen prüft, sowie einem Client, welcher sich Aufgaben generieren lässt, selbige löst und Lösungen prüfen lässt. 
+Der Server stellt REST-Endpunkte für den Client bereit, welche je nach Funktionalität angesprochen werden. Der Client bietet den Studierenden ein Frontend zur Bedienung und Interaktion mit ALADIN.
+
+=== Wahl der Frameworks
+Der Server wurde in Python programmiert. Einerseits, weil es die Programmiersprache ist, in der ich am fortgeschrittensten bin, andererseits, weil sich in Python viele Frameworks zum Language Processing angesiedelt haben. Als zwei Haupt-Frameworks habe ich PythonFastAPI (fastapi, https://fastapi.tiangolo.com), für die Bereitstellung der REST-Endpunkte sowie HuggingFace (https://huggingface.co), für die Language Processing gewählt. 
+
+==== REST-API
+Meine Wahl für das Framework für die REST-API fiel, wie beschrieben, auf FastAPI. FastAPI bietet eine sehr schnelle Bearbeitung der Requests und hat einen merkbaren Geschwindigkeitsvorteil. Das Framework benötigt ledigliche eine Datei für den Start und einen "uvicorn" als ASGI-Webserver umd Requests entgegenzunehmen. Zuerst habe ich den Webserver mit Flask betreiben, da hier aber die Abarbeitung der Requests nicht schnell genug war, habe ich auf FastAPI gewechselt. Die Dekoratoren für Funktionen der Endpunkte ist aber sehr ähnlich / nahezu gleich. Wer also Flask kennt, wird mit FastAPI wenig Probleme haben.
+
+==== Frontend
+Das Frontend habe ich aufgrund des Studiums mit Vuejs programmiert. Ich konnte hier bereits einige Erfahrungen in diesem Semestern sammeln und da ich die Lernkurve nicht als zu hoch empfand, habe ich mich für dieses Framework entschieden. Zuerst nur in einzelnen Aspekten, da aber die Aufgabenlösung und Anzeige eine dynamische Webseite erfordert, habe ich das komplette Frontend (vorher Flask mit Templates) auf komplett Vuejs umgestellt. Vuejs spricht je nach Funktionalität die REST-Endpunkte an um, im JSON Format, mit dem Server zu interagieren.
+
+=== Implementierung der Anforderungen
+Um die oben genanten Anforderungen und wichtige Details umzusetzen, möchte ich die Software und genutzte Konzepte vollumfassend nachfolgend erklären.
+
+==== 
 
 
 
