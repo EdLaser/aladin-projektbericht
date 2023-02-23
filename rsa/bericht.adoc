@@ -1,0 +1,20 @@
+:imagesdir: img
+
+== 6. RSA Verschlüsselung
+
+=== 6.1. Aufgabenbeschreibung
+==== Aufgabenstellung
+Mithilfe dieses Aufgabentyps sollen Studierenden das RSA Verschlüsselungsverfahren verstehen und anwenden lernen. Die Studierenden müssen Schritt für Schritt durch die Aufgaben geführt und es sollen geeignete Lösungshilfen angezeigt werden können mit denen die Studierenden in der Lage sind Schritt für Schritt die Lösungen der Aufgaben erarbeiten. Zudem soll es unterschiedliche Schwierigkeitsgrade geben, bei denen die Studierenden stärker an die Hand genommen werden oder mehr Freiheit gegeben wird um die Aufgaben nach den eigenen Vorstellungen zu lösen. 
+
+==== Anforderungen
+* Zufällige Generierung der vorgegebenen Zahlen
+* Schrittweise Anleitung
+* Unterschiedliche Schwierigkeitsgrade
+* Verständliche Lösungshilfen
+* Vollständige Lösung
+
+=== 6.2. Planung
+=== 6.3. Umsetzung
+
+=== 6.4. Probleme
+=== 6.5. Ausblick
