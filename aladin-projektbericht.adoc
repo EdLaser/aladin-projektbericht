@@ -1,2 +1,17 @@
+:doctype: book
+include::./default-attributes.inc.adoc[]
+
 = Projektbericht Aladin
-// includes machen
+
+// ToDo: mit Inhalt füllen
+== 1. Einleitung
+=== 1.a Problemerläuterung 
+=== 1.b Vorstellung Aladin
+=== 1.c Ziel der Projekte
+
+== Projekte
+include::./steuerlehre/bericht.adoc[]
+include::./epk/bericht.adoc[]
+// include::./sortieralgorithmen/bericht.adoc[]
+// include::./chemie/bericht.adoc[]
+include::./rsa/bericht.adoc[]
