@@ -79,8 +79,30 @@ image:mask-beispiel.png[]
 .Nachträglich gefüllte Masken
 image:masken-gefüllt.png[]
 
+====== Strategy Pattern
+Da bei der Aufgabengenerierung, je nach Parameterkombination, ein unterschiedliches Verfahren genutzt werden muss, habe ich mir das Strategy Pattern zu nutze gemacht. Beim Strategy Pattern wird es einem Objekt bzw. einer Klasse möglich gemacht, ihr Verhalten zur Laufzeit zu ändern. Dafür benötigt man ein Interface, welches die Methoden definiert, die verwendet werden, einen Context, der sein Verhalten ändert, und die konkrete Implementierung der Methoden, welche verwendet werden sollen. Mit diesem Design kann die Aufgabengenerierung ohne tief verzweigte If-Schleifen den richtigen Algorithmus wählen, sowie eine einfache Änderung bzw. Erweiterung gewährleisten.
+Das Pattern wird in der Datei `generator_strategy.py` umgesetzt. Die Klasse `GeneratorStrategie` stellt das Interface mit der *generate* Methode bereit und verwendet dabei die Python Bibliothek *Abstract Base Classes*, um eine abstrakte Methode zu definieren. Alle Klassen die diese Klasse erben, definieren die konkreten Methoden und die *Context* Klasse nutzt diese Methoden. Folgende Strategien werden aktuell verwendet:
+
+.Table Title
+|===
+|Anzahl Sachverhalte | Anzahl unterschiedliche Sachverhalte | Muss enthalten sein | Strategie
+
+| gesetzt
+| gesetzt
+| gesetzt
+| _WithDifficultyAndNeededAndAmount_
+
+
+| gesetzt
+| gesetzt
+| nicht gesetzt
+| _WithDifficultyAndAmount_
+
+|===
+
+Da nur der Parameter *Muss enthalten sein* optional ist, bzw. ausgelassen werden kann, sind nur diese Strategien von nöten. 
+
 ===== Ordnerstruktur
-Zuerst ist es wichtig die Struktur des Projektes näher zu beleuchten.
 
 ====== REST-API
 Die REST-API befindet sich im 'backend' Ordner. Hier gibt es die Subordner und Dateien:
@@ -88,7 +110,7 @@ Die REST-API befindet sich im 'backend' Ordner. Hier gibt es die Subordner und D
 :image:backend-folder.png[]
 
 * `generate_tasks.py` -> Datei, welche Logik zur Generierung der Aufgaben enthält
-* `generator_strategie.py` -> 
+* `generator_strategie.py` -> Dateien für das Strategy Pattern um dynamisch Algorithmen zur Generierung zu wählen
 * `main.py` -> FastAPI-Datei, welche gestartet wird und Hauptfunktionen enthält
 * `/json` -> Ablage JSON-Dateien zum Test
 * `/library` -> Bibliotheken für andere Module
@@ -110,7 +132,7 @@ Die Aufgaben werden auf Anfrage des Clients je nach Parametern generiert. Folgen
 
 * Anzahl der Sachverhalte
 * Anzahl der unterschiedlichen Sachverhalte
-* Sachverhalte welche in der Aufgabe enthalten sein müssenT
+* Sachverhalte welche in der Aufgabe enthalten sein müssen
 
 Diese Parameter können vom Nutzer modifiziert werden und beeinflussen die Aufgabengenerierung. Die Studierenden können diese Parameter über die UI verändern, welche sich dann im Request für die Aufgabengenerierung widerspiegeln. 
 Der Aufgaben- / Task-Endpunkt nimmt diese drei Parameter entgegen
