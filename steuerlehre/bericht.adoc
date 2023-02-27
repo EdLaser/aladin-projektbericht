@@ -30,15 +30,12 @@ Der Server wurde in Python programmiert. Einerseits, weil es die Programmierspra
 Meine Wahl für das Framework für die REST-API fiel, wie beschrieben, auf FastAPI. FastAPI bietet eine sehr schnelle Bearbeitung der Requests und hat einen merkbaren Geschwindigkeitsvorteil. Das Framework benötigt ledigliche eine Datei für den Start und einen "uvicorn" als ASGI-Webserver umd Requests entgegenzunehmen. Zuerst habe ich den Webserver mit Flask betreiben, da hier aber die Abarbeitung der Requests nicht schnell genug war, habe ich auf FastAPI gewechselt. Die Dekoratoren für Funktionen der Endpunkte ist aber sehr ähnlich / nahezu gleich. Wer also Flask kennt, wird mit FastAPI wenig Probleme haben.
 
 ===== Frontend
-Das Frontend habe ich aufgrund des Studiums mit Vuejs programmiert. Ich konnte hier bereits einige Erfahrungen in diesem Semestern sammeln und da ich die Lernkurve nicht als zu hoch empfand, habe ich mich für dieses Framework entschieden. Zuerst nur in einzelnen Aspekten, da aber die Aufgabenlösung und Anzeige eine dynamische Webseite erfordert, habe ich das komplette Frontend (vorher Flask mit Templates) auf komplett Vuejs umgestellt. Vuejs spricht je nach Funktionalität die REST-Endpunkte an um, im JSON Format, mit dem Server zu interagieren.
+Das Frontend habe ich aufgrund des Studiums mit Vuejs programmiert. Ich konnte hier bereits einige Erfahrungen in diesem Semestern sammeln und da ich die Lernkurve nicht als zu hoch empfand, habe ich mich für dieses Framework entschieden. Zuerst nur in einzelnen Aspekten, da aber die Aufgabenlösung und Anzeige eine dynamische Webseite erfordert, habe ich das komplette Frontend (vorher Flask mit Templates) auf komplett Vuejs umgestellt. Vuejs spricht je nach Funktionalität die REST-Endpunkte an um, im JSON Format, mit dem Server zu interagieren. Um ein einheitliches Styling zu gewährlisten habe ich als Frontend Framework Bootstrap gewählt.
 
-==== Implementierung der Anforderungen
-Um die oben genanten Anforderungen und wichtige Details umzusetzen, möchte ich die Software und genutzte Konzepte vollumfassend nachfolgend erklären. 
-
-===== Angewendete Konzepte
+==== Angewendete Konzepte
 Um in folgenden Absätzen Fragen zu klären, erleutere ich zunächst, welche Konzepte und Ideen grundlegende Funktionalitäten in der Software umsetzen. Da wir im Steuerrecht unterschiedliche Sachverhalte pro Aufgabe haben, braucht es eine Datenstruktur für die Sachverhalte. Um diese dann zufällig auszuzwählen bzw. aneinander zu hängen ist eine weitere Struktur von Nutzen, die diese Funktion übernimmt. 
 
-====== Sachverhalt (Case)
+===== Sachverhalt (Case)
 Ein Sachverhalt, nachfolgend auch Case gennant, ist die Repräsentation der notwendigen Informationen zu einem steuerlichen Sachverhalt. Diese Informationen sind in meinen Augen
 
 . Name des Sachverhalts
@@ -60,7 +57,7 @@ class Case:
         self.number = number
 ____
 
-====== Pool / Auswahl an Sachverhalten (Nodepool)
+===== Pool / Auswahl an Sachverhalten (Nodepool)
 Um alle instanziierten Sachverhalte in einer Datenstruktur halten zu können, benötigt es eine, dem Case übergeordnete, Datenstruktur. Zuerst habe ich versucht, auch im Hinblick auf die Generierung, die Datenstruktur als Graph aufzubauen, bei der jeder Case ein eigener Unterknoten und die Blätter des Knotens die Informationen zum Case sind. Da dieser Ansatz im Aufbau nicht sehr intuitiv war, habe ich mich im Nachhinein für eine "Pool" entscheiden. Dieser Pool hält eine Liste an Sachverhalten und stellt Methoden bereit um gezielt oder zufällig Sachverhalte aus dem Pool auszuwählen, aber auch einzelne Sachverhalte hinzuzufügen oder zu löschen. Diese Funktionalität bildet die Klasse nodepool.py ab, welche ein direktes Zusammenspiel mit der case.py Klasse bildet. 
 [source, python]
 ____
@@ -70,7 +67,7 @@ class NodePool:
         self.nodes: List[Case] = []
 ____
 
-====== Natürliche Sprache (Mask-Filling)
+===== Natürliche Sprache (Mask-Filling)
 Die Cases stellen für jeden Sachverhalt Informationen bereit, die unbedingt in der Formulierung vorkommen müssen, woraus sich einzelne Satzbausteine ergeben, welche bei der Satzgenerierung angewendet werden müssen. Jedoch bleiben dann Trennwörter und andere "füllende" Satzbausteine übrig, welche nur mit viel Aufwand fest definiert werden können. Um diese "Lücken" zu schließen und unterschiedliche Satzstrukturen ausbilden zu können, habe ich mir das Konzept des Mask-Filling zu nutze gemacht. Mask-Filling lässt sich nutzen, in dem in den Sätzen Platzhalter, sogenannte "MASKS", eingebaut werden, welche nachträglich von einem Sprachmodel gefüllt werden. Das Sprachmodel teilt den Satz in Tokens auf und sucht aufgrund seiner vorhandenen Daten nach einem möglichst passenden Ersatz für die Maske im Satz, um die Maske danach zu ersetzen. Dabei ist zu beachten, dass das Sprachmodel *nicht* auf steuerliche Sachverhalte trainiert wurde und es daher auch öfter dazu kommen kann, dass die Trennwörter nicht in den Use-Case passen.
 
 .Ungefüllte Masken im Satz
@@ -79,11 +76,11 @@ image:mask-beispiel.png[]
 .Nachträglich gefüllte Masken
 image:masken-gefüllt.png[]
 
-====== Strategy Pattern
+===== Strategy Pattern
 Da bei der Aufgabengenerierung, je nach Parameterkombination, ein unterschiedliches Verfahren genutzt werden muss, habe ich mir das Strategy Pattern zu nutze gemacht. Beim Strategy Pattern wird es einem Objekt bzw. einer Klasse möglich gemacht, ihr Verhalten zur Laufzeit zu ändern. Dafür benötigt man ein Interface, welches die Methoden definiert, die verwendet werden, einen Context, der sein Verhalten ändert, und die konkrete Implementierung der Methoden, welche verwendet werden sollen. Mit diesem Design kann die Aufgabengenerierung ohne tief verzweigte If-Schleifen den richtigen Algorithmus wählen, sowie eine einfache Änderung bzw. Erweiterung gewährleisten.
 Das Pattern wird in der Datei `generator_strategy.py` umgesetzt. Die Klasse `GeneratorStrategie` stellt das Interface mit der *generate* Methode bereit und verwendet dabei die Python Bibliothek *Abstract Base Classes*, um eine abstrakte Methode zu definieren. Alle Klassen die diese Klasse erben, definieren die konkreten Methoden und die *Context* Klasse nutzt diese Methoden. Folgende Strategien werden aktuell verwendet:
 
-.Table Title
+.Strategy Patterns
 |===
 |Anzahl Sachverhalte | Anzahl unterschiedliche Sachverhalte | Muss enthalten sein | Strategie
 
@@ -102,9 +99,9 @@ Das Pattern wird in der Datei `generator_strategy.py` umgesetzt. Die Klasse `Gen
 
 Da nur der Parameter *Muss enthalten sein* optional ist, sind aktuell nur diese Strategien notwendig. 
 
+==== Backend / REST-API
 ===== Ordnerstruktur
 
-====== REST-API
 Die REST-API befindet sich im 'backend' Ordner. Hier gibt es die Subordner und Dateien:
 
 image:backend-folder.png[]
@@ -123,30 +120,6 @@ image:backend-folder.png[]
 * `/library/solution.py` -> Klasse, welche eine Lösung für einen Fall darstellt
 * `/library/task.py` -> Klasse, welche eine Aufgabe mit den einzelnen Fällen darstellt
 * `/library/variations.py` -> Stellt Funktionen des Sprachmodells bereit und bildet die unterschiedlichen Formulierungen für einen Sachverhalt
-
-====== Frontend
-Das Frontend ist ein Vuejs Projekt und befindet sich im 'frontend' Ordner. Dabei finden sich die Vuejs typischen Unterordner:
-
-image:frontend-folder.png[]
-
-* `index.html` -> Basis Landing page mit nötigen Script importen und Vuejs App-Container
-* `/node_modules` -> Module von Nodejs, die benötigt werden
-* `/public` -> Ordner für statische Assetss
-* `/src/App.vue` -> Vuejs Haupt App Komponenente
-* `/src/main.js` -> Vuejs Javascript main Datei um App auf Container in index.html zu mounten
-* `/src/assets` -> Weiterer Ordner für statische Assets
-* `/src/components/MainAppComponent.vue` -> Vereint alle Komponenten / Spiegel Layout unter Komponenten wieder
-* `/src/components/AllTasksComponent.vue` -> Anzeigen aller Tasks auf Server
-* `/src/components/CostumizeTaskComponent.vue` -> Buttons zum einstellen der Aufgabenparameter
-* `/src/components/ErrorComponent.vue` -> Anzeigen von Errors in der Anwendung
-* `/src/components/GivenSolutionComponent.vue` -> Anzeige der Lösungstabelle der Aufgabe
-* `/src/components/store.js` -> Datenstruktur um Daten zwischen Komponenten auszutauschen
-* `/src/components/TaskSentenceComponent.vue` -> Stellt alle generierten Sätze der Aufgabe da
-* `/src/components/UploadFooterComponent` -> Upload von Konfigurationen (nicht funktionsfähig)
-* `/src/components/UserSolutionComponent.vue` -> Lösungsstruktur des Nutzers um Aufgaben zu bearbeiten
-
-===== Kommunikation von Server und Client / Endpunkte
-Server und Client kommunizieren über REST-Calls. Der Client sendet je nach gewünschter Funktionalität / Endpunkt eine Anfrage an den Server, welche dann entsprechend beantwortet wird. 
 
 ===== Generierung der Aufgaben
 Die Aufgaben werden auf Anfrage des Clients je nach Parametern generiert. Folgende Parameter werden im Moment unterstützt:
@@ -184,6 +157,42 @@ class Task:
         return True if correct == len(self.solutions) else False
 ____
 
+
+==== Frontend
+===== Ordnerstruktur
+Das Frontend ist ein Vuejs Projekt und befindet sich im 'frontend' Ordner. Dabei finden sich die Vuejs typischen Unterordner:
+
+image:frontend-folder.png[]
+
+* `index.html` -> Basis Landing page mit nötigen Script importen und Vuejs App-Container
+* `/node_modules` -> Module von Nodejs, die benötigt werden
+* `/public` -> Ordner für statische Assetss
+* `/src/App.vue` -> Vuejs Haupt App Komponenente
+* `/src/main.js` -> Vuejs Javascript main Datei um App auf Container in index.html zu mounten
+* `/src/assets` -> Weiterer Ordner für statische Assets
+* `/src/components/MainAppComponent.vue` -> Vereint alle Komponenten / Spiegel Layout unter Komponenten wieder
+* `/src/components/AllTasksComponent.vue` -> Anzeigen aller Tasks auf Server
+* `/src/components/CostumizeTaskComponent.vue` -> Buttons zum einstellen der Aufgabenparameter
+* `/src/components/ErrorComponent.vue` -> Anzeigen von Errors in der Anwendung
+* `/src/components/GivenSolutionComponent.vue` -> Anzeige der Lösungstabelle der Aufgabe
+* `/src/components/store.js` -> Datenstruktur um Daten zwischen Komponenten auszutauschen
+* `/src/components/TaskSentenceComponent.vue` -> Stellt alle generierten Sätze der Aufgabe da
+* `/src/components/UploadFooterComponent` -> Upload von Konfigurationen (nicht funktionsfähig)
+* `/src/components/UserSolutionComponent.vue` -> Lösungsstruktur des Nutzers um Aufgaben zu bearbeiten
+
+===== Einzelne Komponenten
+Im Folgenden erkläre ich alle Komponenten die ich im Frontend verwendet habe, dabei setzte ich grundglegendes Wissen in Vuejs / Javascript voraus. Für das Styling wird das CSS-Framework Bootstrap verwendet.
+
+====== MainAppComponent
+Der MainAppComponent vereint alle Komponenten der Vuejs Anwendung in einem zentralen Bootstrap Layout. Hier gibt es einen zentralen Container, der mehrere Bootstrap Rows beinhaltet. Auf der erstene Row findet sich der `AllTasksComponent`, welcher sich je nach Anzahl der Tasks skaliert und wächst. Darunter befinden sich der `TaskSentenceComponent` mit dem `CostumizeTaskComponent` auf einer Ebene. Beide Komponenten werden dabei zentriert und beanspruchen gleich viel Platz in der Horizontalen. Darunter folgen, jeweils in separaten Reihen, der `UserSolutionComponent`, zur Lösung des Users, der `GivenSolutionComponent` als vorgegebende Lösung, sowie der `ErrorComponent`, für mögliche Fehler in der Anwendung. Die Komponente hat sonst keine Funktionalität.
+
+image:ui-konzept.png[]
+
+====== AllTasksComponent
+Im AllTasksComponent werden alle aktuellen Tasks dargestellt, welche vom Server generiert wurden. Hierbei wird für jeden Task ein button generiert der mit der ID des Tasks versehen wird. Je nachdem ob der Task gelöst wurde, wird entweder ein roter Button (nicht gelöst) oder ein grüner Button (gelöst) generiert. Die Komponente fragt je nach Änderung der im Store gespeicherten Task-ID den `/generated-tasks` Endpunkt ab und erhält ein JSON der aktuell generierten Tasks vom Server. 
+
+===== Kommunikation von Server und Client / Endpunkte
+Server und Client kommunizieren über REST-Calls. Der Client sendet je nach gewünschter Funktionalität / Endpunkt eine Anfrage an den Server, welche dann entsprechend beantwortet wird. 
 
 === Ergebnisse
 
