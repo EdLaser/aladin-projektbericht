@@ -1,4 +1,4 @@
-:source-highlighter: highlight.js
+:source-highlighter: rouge
 :imagesdir: img
 == Steuerrecht
 
@@ -100,14 +100,14 @@ Das Pattern wird in der Datei `generator_strategy.py` umgesetzt. Die Klasse `Gen
 
 |===
 
-Da nur der Parameter *Muss enthalten sein* optional ist, bzw. ausgelassen werden kann, sind nur diese Strategien von nöten. 
+Da nur der Parameter *Muss enthalten sein* optional ist, sind aktuell nur diese Strategien notwendig. 
 
 ===== Ordnerstruktur
 
 ====== REST-API
 Die REST-API befindet sich im 'backend' Ordner. Hier gibt es die Subordner und Dateien:
 
-:image:backend-folder.png[]
+image:backend-folder.png[]
 
 * `generate_tasks.py` -> Datei, welche Logik zur Generierung der Aufgaben enthält
 * `generator_strategie.py` -> Dateien für das Strategy Pattern um dynamisch Algorithmen zur Generierung zu wählen
@@ -124,6 +124,27 @@ Die REST-API befindet sich im 'backend' Ordner. Hier gibt es die Subordner und D
 * `/library/task.py` -> Klasse, welche eine Aufgabe mit den einzelnen Fällen darstellt
 * `/library/variations.py` -> Stellt Funktionen des Sprachmodells bereit und bildet die unterschiedlichen Formulierungen für einen Sachverhalt
 
+====== Frontend
+Das Frontend ist ein Vuejs Projekt und befindet sich im 'frontend' Ordner. Dabei finden sich die Vuejs typischen Unterordner:
+
+image:frontend-folder.png[]
+
+* `index.html` -> Basis Landing page mit nötigen Script importen und Vuejs App-Container
+* `/node_modules` -> Module von Nodejs, die benötigt werden
+* `/public` -> Ordner für statische Assetss
+* `/src/App.vue` -> Vuejs Haupt App Komponenente
+* `/src/main.js` -> Vuejs Javascript main Datei um App auf Container in index.html zu mounten
+* `/src/assets` -> Weiterer Ordner für statische Assets
+* `/src/components/MainAppComponent.vue` -> Vereint alle Komponenten / Spiegel Layout unter Komponenten wieder
+* `/src/components/AllTasksComponent.vue` -> Anzeigen aller Tasks auf Server
+* `/src/components/CostumizeTaskComponent.vue` -> Buttons zum einstellen der Aufgabenparameter
+* `/src/components/ErrorComponent.vue` -> Anzeigen von Errors in der Anwendung
+* `/src/components/GivenSolutionComponent.vue` -> Anzeige der Lösungstabelle der Aufgabe
+* `/src/components/store.js` -> Datenstruktur um Daten zwischen Komponenten auszutauschen
+* `/src/components/TaskSentenceComponent.vue` -> Stellt alle generierten Sätze der Aufgabe da
+* `/src/components/UploadFooterComponent` -> Upload von Konfigurationen (nicht funktionsfähig)
+* `/src/components/UserSolutionComponent.vue` -> Lösungsstruktur des Nutzers um Aufgaben zu bearbeiten
+
 ===== Kommunikation von Server und Client / Endpunkte
 Server und Client kommunizieren über REST-Calls. Der Client sendet je nach gewünschter Funktionalität / Endpunkt eine Anfrage an den Server, welche dann entsprechend beantwortet wird. 
 
@@ -135,7 +156,34 @@ Die Aufgaben werden auf Anfrage des Clients je nach Parametern generiert. Folgen
 * Sachverhalte welche in der Aufgabe enthalten sein müssen
 
 Diese Parameter können vom Nutzer modifiziert werden und beeinflussen die Aufgabengenerierung. Die Studierenden können diese Parameter über die UI verändern, welche sich dann im Request für die Aufgabengenerierung widerspiegeln. 
-Der Aufgaben- / Task-Endpunkt nimmt diese drei Parameter entgegen
+Der Aufgaben- / Task-Endpunkt nimmt diese drei Parameter entgegen und wählt mit der `determine_strategy` Methode die Strategie für die Kombination der Parameter für den Context. Darauf werden zuerst die gewünschten Cases aus dem Pool gepickt, danach wird geprüft ob dann bereits die geforderte Anzahl der Cases erreicht ist, wenn nicht werden die restlichen Cases zufällig aufgefüllt, wenn ja werden nur die Cases, die gewünscht sind zurückgegeben. Aus den Cases werden im Anschluss die Lösungen für den Server berechnet sowie die korrekten rechtlichen Grundlagen zugewiesen. Außerdem wird das zu versteuernde Einkommen berechnet und aus den Cases ein Task erstellt, welcher jeder Aufgabe über eine ID identifiziert und eine Liste der Cases, Lösungen und das zvE enthält. Als letztes wird ein JSON vorbereitet, welches die ID des Task sowie alle Cases enthält, bei welchen ein Satz aus jedem Case in der Liste im Task gebaut wird. Für die Generierung der Sätze, werden die unterschiedlichen Satzkonstruktionen in `variations.py` genutzt, welche die *[MASK]* Tokens an unterschiedlichen Stellen als String enthalten. Es wird eine zufällige Variations ausgewählt und anschließend werden alle Masken im Satz durch das Sprachmodel gefüllt, dann wird der Satz zurückgegeben. 
+image:mask-variations.png[]
+Für eine gesamte Übersicht der Tasks in der Sitzung des Nutzers, hält der Server eine Liste an Tasks, welche bei jeder neuen Generierung um den neuen Task erweitert wird.
+
+Task-Klasse
+[source, python]
+____
+class Task:
+    id_generated = itertools.count()
+
+    def __init__(self, cases: list[Case] = [], zve: int = 0, solutions: dict[str, Solution] = {}) -> None:
+        self.id = next(Task.id_generated)
+        self.cases: list[Case] = cases
+        self.solutions: dict[str, Solution] = solutions
+        self.zve = zve
+        self.solved = {sol_id: {'name': False, 'law': False, 'num': False} for sol_id in self.solutions.keys()}
+
+    def to_dict(self):
+        return {"id": self.id, "case": [case.to_dict() for case in self.cases], "solved": self.solved}
+
+    def all_solved(self):
+        correct = 0
+        for is_correct in self.solved.values():
+            if all(is_correct.values()):
+                correct +=1
+        return True if correct == len(self.solutions) else False
+____
+
 
 === Ergebnisse
 
