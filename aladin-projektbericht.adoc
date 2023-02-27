@@ -4,12 +4,11 @@ include::./default-attributes.inc.adoc[]
 = Projektbericht Aladin
 
 // ToDo: mit Inhalt füllen
-== 1. Einleitung
-=== 1.a Problemerläuterung 
-=== 1.b Vorstellung Aladin
-=== 1.c Ziel der Projekte
+== Einleitung
+=== Problemerläuterung 
+=== Vorstellung Aladin
+=== Ziel der Projekte
 
-== Projekte
 include::./steuerlehre/bericht.adoc[]
 include::./epk/bericht.adoc[]
 // include::./sortieralgorithmen/bericht.adoc[]

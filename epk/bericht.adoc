@@ -1,19 +1,19 @@
 :imagesdir: img
 
 
-= 3. Generierung Ereignisgesteuerte Prozessketten
+== Generierung Ereignisgesteuerte Prozessketten
 
-== 3.1. Aufgabenbeschreibung
+=== Aufgabenbeschreibung
 Diese Aufgabe zielt darauf ab, den Studierenden ein Verständnis für die Modellierung von ereignisgesteuerten Prozessketten (EPK) zu vermitteln. Dabei geht es um die praktische Anwendung von EPKs, um komplexe Geschäftsprozesse grafisch darzustellen und Fehler zu erkennen. Das Ziel der Aufgaben ist es, einen Überblick über Abhängigkeiten und Beziehungen zwischen den verschiedenen Prozessschritten zu geben. Die Studierenden sollen lernen, wie EPKs erstellt werden, die den Anforderungen eines bestimmten Geschäftsprozesses entspricht. 
 Hierbei sollten die Studierenden auch die verschiedenen Arten von Gates und EPK-Elementen verstehen, die in einer EPK verwendet werden können. 
 
 Der Entwickler hatte die Aufgabe EPKs zufällig zu generieren unter Einhaltung von bestimmten Parametern und Einhaltung von syntaktischer Korrektheit. Im weiteren Verlauf des Projektes sollte dann eine Oberfläche erstellt werden, die es den Benutzern ermöglicht, EPKs einfach zu erstellen und zu bearbeiten. Darüber hinaus sollten verschiedene Aufgabentypen entworfen werden, um den Studierenden zu helfen, ihr Wissen und ihre Fähigkeiten bei der Modellierung von EPKs zu verbessern.
 
-== 3.2. Planung
+=== Planung
 Um sicherzustellen, dass das Projekt effektiv und erfolgreich umgesetzt wurde, wurde ein regelmäßiges Kommunikations- und Planungssystem mit dem Kunden eingerichtet. Einmal in der Woche fanden Treffen statt, bei denen der Fortschritt des Projekts, erreichte Ziele, Probleme und Unklarheiten besprochen wurden. In diesen Treffen wurden auch die nächsten Aufgabenpakete beschlossen, um sicherzustellen, dass das Projekt im Zeitplan blieb. Darüber hinaus arbeitete der Entwickler zweimal pro Woche gezielt an den in der Planung festgelegten Wochenzielen. Diese Vorgehensweise half dabei, den Entwicklungsprozess auf Kurs zu halten und sicherzustellen, dass das Projekt termingerecht abgeschlossen wurde.
 Der Entwickler nutzte Java als Programmiersprache, da er hierin am erfahrensten war und Java eine breite Unterstützung durch die Community und eine umfangreiche Sammlung von Bibliotheken und Frameworks bietet. Als Entwicklungsumgebung wurde JetBrains IntelliJ verwendet, die sich durch eine intuitive Oberfläche, intelligente Codevervollständigung und integrierte Versionskontrollsysteme auszeichnet. Die Verwendung von IntelliJ hat dem Entwickler geholfen, schneller und effizienter zu arbeiten und den Entwicklungsprozess zu beschleunigen. Das Versionskontrollsystem Github wurde verwendet, um sicherzustellen, dass das Projekt effektiv und sicher verwaltet wurde. Das Repository für das Projekt ist auf https://github.com/TinkerTee69/ProjSem zu finden. Das Projekt benötigt lediglich ein aktuelles Java SDK (getestet wurde mit openjdk 19.0.1), was die Einrichtung der Umgebung einfach und unkompliziert macht. 
 
-== 3.3. Umsetzung
+=== Umsetzung
 Die Umsetzung des Projekts basierte auf einem sorgfältig entwickelten Programmablaufplan, der es dem Entwickler ermöglichte, den Algorithmus Schritt für Schritt nachzuvollziehen (siehe https://github.com/TinkerTee69/ProjSem/blob/master/PAP.vsdx). Hierbei wurden die Regeln von Ereignisgesteuerten Prozessketten (EPKs) berücksichtigt. Die EPKs legen fest, wie Geschäftsprozesse modelliert werden sollten, um eine klare und verständliche Darstellung zu ermöglichen. Falls der Leser nicht mit den Regeln der EPKs vertraut ist, kann er auf https://www.netzwerk-welt.de/common_files/BWL/EPK.pdf weitere Informationen dazu finden.
 
 Im Folgenden wird der Entwickler seinen Quellcode erläutern und die Schritte des Algorithmus detailliert erläutern, um eine klare und verständliche Darstellung der Funktionsweise des Programms zu ermöglichen. Hierbei wird er auf die wichtigsten Konzepte und Technologien eingehen, die bei der Umsetzung des Projekts zum Einsatz kamen. Dazu gehören unter anderem die Verwendung von Java als Programmiersprache, die Implementierung von Algorithmen und Datenstrukturen, die Integration von Frameworks und Bibliotheken sowie die Nutzung von Entwicklungsumgebungen und Tools zur Unterstützung des Entwicklungsprozesses.
@@ -87,7 +87,7 @@ Nach dem füllen der Elemente zwischen Start und erstem Gate, werden die Element
 Wenn alle Elemente zwischen den Gates befüllt wurden, werden die Elemente zwischen dem Endgate und dem nächsten Startgate befüllt (Methode „fillAfterEndgate“), oder bis das Endereignis (mit der ID 2) gefunden wurde.
 Das EPK ist mit Texten versehen, nun soll dieses in der Klasse Edotor.java ausgegeben werden. Als erstes wird die Ausgabe UTF-8 tauglich gemacht. Anschließend wird die Liste „list“ durchlaufen und je nach Objekt wird auf der Konsole in Edotor Schreibweise das jeweilige Objekt ausgegeben. 
 
-== 3.4. Probleme
+=== Probleme
 
 Es ist äußerst vorteilhaft, dass der Kunde technische Kenntnisse besitzt, die bei der Umsetzung des Projekts helfen können. Diese können dabei helfen, Fehler zu identifizieren, Schwierigkeiten bei der Umsetzung zu beheben und wertvolle Ratschläge zu geben. Allerdings ist es wichtig, frühzeitig Kontakt mit dem Kunden aufzunehmen, um diese Möglichkeit zu nutzen. Da der Entwickler dies bei der Umsetzung erst spät im Projekt erkannte, kam es zu Frustrationen und Verzögerungen und der bis dahin geschriebene Algorithmus musste von Grund auf neu geschrieben werden. Um dies zu vermeiden, sollten Absprachen mit dem Kunden und eine Präsentation des Quellcodes so früh wie möglich stattfinden, um sicherzustellen, dass das Projekt von Anfang an auf einem guten Weg ist und das Wissen und die Erfahrung des Kunden effektiv genutzt werden.
 
@@ -97,6 +97,6 @@ Es wurde auch festgestellt, dass es in einigen Fällen vorkommt, dass ein Ereign
 
 
 
-== 3.5. Ausblick
+=== Ausblick
 Der Entwicklungsprozess der Anwendung zur Generierung von ereignisgesteuerten Prozessketten (EPKs) stieß auf Schwierigkeiten bezüglich der Einhaltung der Parameter und der syntaktischen Korrektheit. Aus diesem Grund wurde die Entwicklung auf die Generierung von EPKs beschränkt und die Webseite Edotor.net wurde als Plattform zur Anzeige der generierten EPKs genutzt. Es bleibt jedoch das Problem, dass die eingefügten Texte keinen zusammenhängenden Geschäftsprozess darstellen. Um dies zu lösen, könnten Sprachmodelle wie ChatGPT in Erwägung gezogen werden. Wenn das Problem mit den Parametern gelöst wird, könnte die Anwendung um die Entwicklung von Aufgabentypen erweitert werden. Da die Entwicklung von EPKs das Hauptziel der Aufgabe war, wurde dieser Bereich priorisiert und andere Aspekte wurden für spätere Entwicklungsphasen aufgeschoben.
 

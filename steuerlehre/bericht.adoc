@@ -1,8 +1,8 @@
 :source-highlighter: highlight.js
 :imagesdir: img
-== 2. Steuerrecht
+== Steuerrecht
 
-=== 2.a Aufgabenbeschreibung
+=== Aufgabenbeschreibung
 ==== Gegebenheiten / Design der Aufgabe
 Meine Augfabe im Projektseminar war es, Aufgaben zum Steuerrecht umzusetzen. Dabei ging es darum, Aufgaben zu generieren bei denen die Studierenden das zu versteuernde Einkommen berechnet. Die Aufgaben sollen mit zufälligen Werten und Kombinationen aus einem Pool und Sachverhaltstypen generiert werden. Um die Lösung des Studenten zu prüfen, muss neben der Aufgabe auch noch die dazugehörige Lösung erstellt werden.
 Basis dieser Aufgaben bildet ein Text, mit unterschiedlichen steuerlichen Sachverhalten, welche die Studierenden herauslesen müssen. Die Sachverhalte sind dabei miteiander verwoben, können aber müssen nicht aufeinander aufbauen. Dies soll dazu führen, dass die Studierenden zum aktiven Kombinieren angeregt werden. Die Anzahl an unterschieldichen Sachverhaltstypen, soll stetig erweiterbar bleiben, im Moment werden Gehalt, Kapitalvermögen, Vermietung und für alle Typen Werbungskosten unterstützt.
