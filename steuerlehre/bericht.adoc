@@ -1,15 +1,15 @@
 :source-highlighter: highlight.js
 :imagesdir: img
-= 2. Steuerrecht
+== 2. Steuerrecht
 
-== 2.a Aufgabenbeschreibung
-=== Gegebenheiten / Design der Aufgabe
+=== 2.a Aufgabenbeschreibung
+==== Gegebenheiten / Design der Aufgabe
 Meine Augfabe im Projektseminar war es, Aufgaben zum Steuerrecht umzusetzen. Dabei ging es darum, Aufgaben zu generieren bei denen die Studierenden das zu versteuernde Einkommen berechnet. Die Aufgaben sollen mit zufälligen Werten und Kombinationen aus einem Pool und Sachverhaltstypen generiert werden. Um die Lösung des Studenten zu prüfen, muss neben der Aufgabe auch noch die dazugehörige Lösung erstellt werden.
 Basis dieser Aufgaben bildet ein Text, mit unterschiedlichen steuerlichen Sachverhalten, welche die Studierenden herauslesen müssen. Die Sachverhalte sind dabei miteiander verwoben, können aber müssen nicht aufeinander aufbauen. Dies soll dazu führen, dass die Studierenden zum aktiven Kombinieren angeregt werden. Die Anzahl an unterschieldichen Sachverhaltstypen, soll stetig erweiterbar bleiben, im Moment werden Gehalt, Kapitalvermögen, Vermietung und für alle Typen Werbungskosten unterstützt.
 Um eine natürliche Satzstruktur zu wahren, muss der Text dabei unterschiedliche Satzkonstruktionen enhalten. Dazu sollen mehrere 'Versionen' des Satzes genutzt werden, welche dann zufällig ausgewählt werden. 
 Die Wertebereiche der Aufgaben müssen sich in einem realistischen Bereich bewegen, um nahezu an die Realtität zu kommen, sodass sich der Text umso mehr 'real' anfühlt.
 
-=== Anforderungen
+==== Anforderungen
 Aus diesen Gegebenheiten ergeben sich folgende Anforderungen an die Software
 
 . Zufällige Generierung der Summen und Sachverhalte
@@ -18,27 +18,27 @@ Aus diesen Gegebenheiten ergeben sich folgende Anforderungen an die Software
 . Realistische Wertebereiche
 . Trennung der Generierung und Lösung
 
-== Technische Umsetzung
-=== Allgemeine Architektur
+=== Technische Umsetzung
+==== Allgemeine Architektur
 Die Software bildet besteht aus einem Server, welcher die Aufgaben zentral verwaltet, generiert, löst und die Lösungen prüft, sowie einem Client, welcher sich Aufgaben generieren lässt, selbige löst und Lösungen prüfen lässt. 
-Der Server stellt REST-Endpunkte für den Client bereit, welche je nach Funktionalität angesprochen werden. Der Client bietet den Studierenden ein Frontend zur Bedienung und Interaktion mit ALADIN.
+Der Server stellt REST-Endpunkte für den Client bereit, welche je nach Funktionalität angesprochen werden. Der Client bietet den Studierenden ein Frontend zur Bedienung und Interaktion mit ALADIN. Ich habe hier eine klare Trennung vorgenommen, einerseits Python, mit seinen zahlreichen Funktionen in Richtung KI, unterzubringen und JavaScript damit die UI responsiv und dynamisch sein kann. Außerdem kann weiterhin kklar zwischen den Funktionalitäten abgegrenzt und seperat an ihnen gearbeitet werden. Das ganze nur als einzelne Webanwendung zu betreiben, war in den Funktionalitäten so eingegrenzt, dass ich mich dazu entschieden habe, hier diese Trennung vorzunehmen. 
 
-=== Wahl der Frameworks
+==== Wahl der Frameworks
 Der Server wurde in Python programmiert. Einerseits, weil es die Programmiersprache ist, in der ich am fortgeschrittensten bin, andererseits, weil sich in Python viele Frameworks zum Language Processing angesiedelt haben. Als zwei Haupt-Frameworks habe ich PythonFastAPI (fastapi, https://fastapi.tiangolo.com), für die Bereitstellung der REST-Endpunkte sowie HuggingFace (https://huggingface.co), für die Language Processing gewählt. 
 
-==== REST-API
+===== REST-API
 Meine Wahl für das Framework für die REST-API fiel, wie beschrieben, auf FastAPI. FastAPI bietet eine sehr schnelle Bearbeitung der Requests und hat einen merkbaren Geschwindigkeitsvorteil. Das Framework benötigt ledigliche eine Datei für den Start und einen "uvicorn" als ASGI-Webserver umd Requests entgegenzunehmen. Zuerst habe ich den Webserver mit Flask betreiben, da hier aber die Abarbeitung der Requests nicht schnell genug war, habe ich auf FastAPI gewechselt. Die Dekoratoren für Funktionen der Endpunkte ist aber sehr ähnlich / nahezu gleich. Wer also Flask kennt, wird mit FastAPI wenig Probleme haben.
 
-==== Frontend
+===== Frontend
 Das Frontend habe ich aufgrund des Studiums mit Vuejs programmiert. Ich konnte hier bereits einige Erfahrungen in diesem Semestern sammeln und da ich die Lernkurve nicht als zu hoch empfand, habe ich mich für dieses Framework entschieden. Zuerst nur in einzelnen Aspekten, da aber die Aufgabenlösung und Anzeige eine dynamische Webseite erfordert, habe ich das komplette Frontend (vorher Flask mit Templates) auf komplett Vuejs umgestellt. Vuejs spricht je nach Funktionalität die REST-Endpunkte an um, im JSON Format, mit dem Server zu interagieren.
 
-=== Implementierung der Anforderungen
+==== Implementierung der Anforderungen
 Um die oben genanten Anforderungen und wichtige Details umzusetzen, möchte ich die Software und genutzte Konzepte vollumfassend nachfolgend erklären. 
 
-==== Angewendete Konzepte
+===== Angewendete Konzepte
 Um in folgenden Absätzen Fragen zu klären, erleutere ich zunächst, welche Konzepte und Ideen grundlegende Funktionalitäten in der Software umsetzen. Da wir im Steuerrecht unterschiedliche Sachverhalte pro Aufgabe haben, braucht es eine Datenstruktur für die Sachverhalte. Um diese dann zufällig auszuzwählen bzw. aneinander zu hängen ist eine weitere Struktur von Nutzen, die diese Funktion übernimmt. 
 
-===== Sachverhalt (Case)
+====== Sachverhalt (Case)
 Ein Sachverhalt, nachfolgend auch Case gennant, ist die Repräsentation der notwendigen Informationen zu einem steuerlichen Sachverhalt. Diese Informationen sind in meinen Augen
 
 . Name des Sachverhalts
@@ -60,7 +60,7 @@ class Case:
         self.number = number
 ____
 
-===== Pool / Auswahl an Sachverhalten (Nodepool)
+====== Pool / Auswahl an Sachverhalten (Nodepool)
 Um alle instanziierten Sachverhalte in einer Datenstruktur halten zu können, benötigt es eine, dem Case übergeordnete, Datenstruktur. Zuerst habe ich versucht, auch im Hinblick auf die Generierung, die Datenstruktur als Graph aufzubauen, bei der jeder Case ein eigener Unterknoten und die Blätter des Knotens die Informationen zum Case sind. Da dieser Ansatz im Aufbau nicht sehr intuitiv war, habe ich mich im Nachhinein für eine "Pool" entscheiden. Dieser Pool hält eine Liste an Sachverhalten und stellt Methoden bereit um gezielt oder zufällig Sachverhalte aus dem Pool auszuwählen, aber auch einzelne Sachverhalte hinzuzufügen oder zu löschen. Diese Funktionalität bildet die Klasse nodepool.py ab, welche ein direktes Zusammenspiel mit der case.py Klasse bildet. 
 [source, python]
 ____
@@ -70,7 +70,7 @@ class NodePool:
         self.nodes: List[Case] = []
 ____
 
-===== Natürliche Sprache (Mask-Filling)
+====== Natürliche Sprache (Mask-Filling)
 Die Cases stellen für jeden Sachverhalt Informationen bereit, die unbedingt in der Formulierung vorkommen müssen, woraus sich einzelne Satzbausteine ergeben, welche bei der Satzgenerierung angewendet werden müssen. Jedoch bleiben dann Trennwörter und andere "füllende" Satzbausteine übrig, welche nur mit viel Aufwand fest definiert werden können. Um diese "Lücken" zu schließen und unterschiedliche Satzstrukturen ausbilden zu können, habe ich mir das Konzept des Mask-Filling zu nutze gemacht. Mask-Filling lässt sich nutzen, in dem in den Sätzen Platzhalter, sogenannte "MASKS", eingebaut werden, welche nachträglich von einem Sprachmodel gefüllt werden. Das Sprachmodel teilt den Satz in Tokens auf und sucht aufgrund seiner vorhandenen Daten nach einem möglichst passenden Ersatz für die Maske im Satz, um die Maske danach zu ersetzen. Dabei ist zu beachten, dass das Sprachmodel *nicht* auf steuerliche Sachverhalte trainiert wurde und es daher auch öfter dazu kommen kann, dass die Trennwörter nicht in den Use-Case passen.
 
 .Ungefüllte Masken im Satz
@@ -79,10 +79,10 @@ image:mask-beispiel.png[]
 .Nachträglich gefüllte Masken
 image:masken-gefüllt.png[]
 
-==== Ordnerstruktur
+===== Ordnerstruktur
 Zuerst ist es wichtig die Struktur des Projektes näher zu beleuchten.
 
-===== REST-API
+====== REST-API
 Die REST-API befindet sich im 'backend' Ordner. Hier gibt es die Subordner und Dateien:
 
 :image:backend-folder.png[]
@@ -102,10 +102,19 @@ Die REST-API befindet sich im 'backend' Ordner. Hier gibt es die Subordner und D
 * `/library/task.py` -> Klasse, welche eine Aufgabe mit den einzelnen Fällen darstellt
 * `/library/variations.py` -> Stellt Funktionen des Sprachmodells bereit und bildet die unterschiedlichen Formulierungen für einen Sachverhalt
 
-==== Generierung der Aufgaben
+===== Kommunikation von Server und Client / Endpunkte
+Server und Client kommunizieren über REST-Calls. Der Client sendet je nach gewünschter Funktionalität / Endpunkt eine Anfrage an den Server, welche dann entsprechend beantwortet wird. 
 
+===== Generierung der Aufgaben
+Die Aufgaben werden auf Anfrage des Clients je nach Parametern generiert. Folgende Parameter werden im Moment unterstützt:
 
+* Anzahl der Sachverhalte
+* Anzahl der unterschiedlichen Sachverhalte
+* Sachverhalte welche in der Aufgabe enthalten sein müssenT
 
-== Ergebnisse
+Diese Parameter können vom Nutzer modifiziert werden und beeinflussen die Aufgabengenerierung. Die Studierenden können diese Parameter über die UI verändern, welche sich dann im Request für die Aufgabengenerierung widerspiegeln. 
+Der Aufgaben- / Task-Endpunkt nimmt diese drei Parameter entgegen
 
-== Ausblick
+=== Ergebnisse
+
+=== Ausblick
