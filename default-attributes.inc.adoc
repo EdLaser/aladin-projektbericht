@@ -1,5 +1,5 @@
 // Meta
-:project-name: Aufwandsentschädigungsberechnung
+:project-name: Aladin Porjektbericht
 // Settings:
 :toc:
 :toc-title: Inhaltsverzeichnis
