@@ -1,5 +1,7 @@
 // Meta
-:project-name: Aufwandsentschädigungsberechnung
+:project-name: Aladin Porjektbericht
+:sectnums:
+:sectnumlevels: 5
 // Settings:
 :toc:
 :toc-title: Inhaltsverzeichnis
@@ -15,9 +17,9 @@
 :!example-caption:
 :experimental:
 // folders
-// ifndef::imagesdir[:imagesdir: images]
-// ifndef::diagramsdir[:diagramsdir: diagrams]
-// ifndef::plantumlsdir[:plantumlsdir: plantuml]
+ifndef::imagesdir[:imagesdir: img]
+ifndef::diagramsdir[:diagramsdir: diagrams]
+ifndef::plantumlsdir[:plantumlsdir: plantuml]
 // Hyphenation for PDF dokumente
 :lang: DE
 :hyphens:

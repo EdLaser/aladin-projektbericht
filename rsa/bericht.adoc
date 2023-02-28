@@ -1,8 +1,8 @@
 :imagesdir: img
 
-== 6. RSA Verschlüsselung
+== RSA Verschlüsselung
 
-=== 6.1. Aufgabenbeschreibung
+=== Aufgabenbeschreibung
 [#tasks]
 ==== Aufgabenstellung
 Mithilfe dieses Aufgabentyps sollen Studierenden das RSA Verschlüsselungsverfahren verstehen und anwenden lernen. Die Studierenden müssen Schritt für Schritt durch die Aufgaben geführt werden. Zusätzlich sollen geeignete Lösungshilfen vorhanden sein, mit denen die Studierenden in der Lage sind Schritt für Schritt die Lösungen der Aufgaben erarbeiten. Durch unterschiedliche Schwierigkeitsgrade, bei denen die Studierenden stärker an die Hand genommen werden oder mehr Freiheit gegeben wird, können die Studieren ihre Fähigkeiten auf jeden jeweiligen Lernstand anpassen.
@@ -26,8 +26,8 @@ image::example_exercise.png[pdfwidth=450px, width=450px]
 * Verständliche Lösungshilfen
 * Vollständige Lösung
 
-=== 6.2. Planung
-=== 6.3. Umsetzung
+=== Planung
+=== Umsetzung
 [#technologies]
 ==== Verwendete Technologien
 
@@ -48,7 +48,7 @@ image::diagram_25_02_23.svg[]
 ==== Sequenzdiagram - Frontend
 image::activity_diagram_frontend.svg[]
 
-=== 6.4. Probleme
+=== Probleme
 * Geschwindikeit der Applikation ist von der Rechenleistung des Clients abhängig siehe
 link:#architecture[Architektur]
 * Größe des BigInt in TypeScript
@@ -68,7 +68,7 @@ Deshalb werden immer die selben Schlüssel für das Ver-/Entschlüsseln von Text
 const rsaString = new Rsa({p: 3, q: 43, e: 5});
 ====
 
-=== 6.5. Ergebnis und Ausblick
+=== Ergebnis und Ausblick
 . Erweiterung um Textkomprimierung z.Bsp. Huffman-Code
 . Interaktive Lösungshilfen
 +
