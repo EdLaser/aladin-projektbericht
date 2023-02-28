@@ -48,23 +48,23 @@ Diese Informationen werden pro Sachverhalt einzeln gespeichert und durch einen K
 Die Klasse hält die notwendigen Infromationen wie folgt
 [source,python]
 ____
-class Case:
-    def __init__(self, name="", subject="", verb="", object="", number=0) -> None:
-        self.name = name
-        self.subject = subject
-        self.verb = verb
-        self.object = object
-        self.number = number
+    class Case:
+        def __init__(self, name="", subject="", verb="", object="", number=0) -> None:
+            self.name = name
+            self.subject = subject
+            self.verb = verb
+            self.object = object
+            self.number = number
 ____
 
 ===== Pool / Auswahl an Sachverhalten (Nodepool)
 Um alle instanziierten Sachverhalte in einer Datenstruktur halten zu können, benötigt es eine, dem Case übergeordnete, Datenstruktur. Zuerst habe ich versucht, auch im Hinblick auf die Generierung, die Datenstruktur als Graph aufzubauen, bei der jeder Case ein eigener Unterknoten und die Blätter des Knotens die Informationen zum Case sind. Da dieser Ansatz im Aufbau nicht sehr intuitiv war, habe ich mich im Nachhinein für eine "Pool" entscheiden. Dieser Pool hält eine Liste an Sachverhalten und stellt Methoden bereit um gezielt oder zufällig Sachverhalte aus dem Pool auszuwählen, aber auch einzelne Sachverhalte hinzuzufügen oder zu löschen. Diese Funktionalität bildet die Klasse nodepool.py ab, welche ein direktes Zusammenspiel mit der case.py Klasse bildet. 
 [source, python]
 ____
-class NodePool:
-    def __init__(self, name: str) -> None:
-        self.name = name
-        self.nodes: List[Case] = []
+    class NodePool:
+        def __init__(self, name: str) -> None:
+            self.name = name
+            self.nodes: List[Case] = []
 ____
 
 ===== Natürliche Sprache (Mask-Filling)
@@ -136,25 +136,25 @@ Für eine gesamte Übersicht der Tasks in der Sitzung des Nutzers, hält der Ser
 Task-Klasse
 [source, python]
 ____
-class Task:
-    id_generated = itertools.count()
+    class Task:
+        id_generated = itertools.count()
 
-    def __init__(self, cases: list[Case] = [], zve: int = 0, solutions: dict[str, Solution] = {}) -> None:
-        self.id = next(Task.id_generated)
-        self.cases: list[Case] = cases
-        self.solutions: dict[str, Solution] = solutions
-        self.zve = zve
-        self.solved = {sol_id: {'name': False, 'law': False, 'num': False} for sol_id in self.solutions.keys()}
+        def __init__(self, cases: list[Case] = [], zve: int = 0, solutions: dict[str, Solution] = {}) -> None:
+            self.id = next(Task.id_generated)
+            self.cases: list[Case] = cases
+            self.solutions: dict[str, Solution] = solutions
+            self.zve = zve
+            self.solved = {sol_id: {'name': False, 'law': False, 'num': False} for sol_id in self.solutions.keys()}
 
-    def to_dict(self):
-        return {"id": self.id, "case": [case.to_dict() for case in self.cases], "solved": self.solved}
+        def to_dict(self):
+            return {"id": self.id, "case": [case.to_dict() for case in self.cases], "solved": self.solved}
 
-    def all_solved(self):
-        correct = 0
-        for is_correct in self.solved.values():
-            if all(is_correct.values()):
-                correct +=1
-        return True if correct == len(self.solutions) else False
+        def all_solved(self):
+            correct = 0
+            for is_correct in self.solved.values():
+                if all(is_correct.values()):
+                    correct +=1
+            return True if correct == len(self.solutions) else False
 ____
 
 
@@ -190,6 +190,18 @@ image:ui-konzept.png[]
 
 ====== AllTasksComponent
 Im AllTasksComponent werden alle aktuellen Tasks dargestellt, welche vom Server generiert wurden. Hierbei wird für jeden Task ein button generiert der mit der ID des Tasks versehen wird. Je nachdem ob der Task gelöst wurde, wird entweder ein roter Button (nicht gelöst) oder ein grüner Button (gelöst) generiert. Die Komponente fragt je nach Änderung der im Store gespeicherten Task-ID den `/generated-tasks` Endpunkt ab und erhält ein JSON der aktuell generierten Tasks vom Server. 
+
+[source, javascript]
+____
+    getGeneratedTasks() {
+        axios.get("http://localhost:8000/generated-tasks")
+            .then((res) => {
+                this.generatedTasks = res.data
+            }).catch((error) => {
+                store.error = error.data
+            });
+    }
+____
 
 ===== Kommunikation von Server und Client / Endpunkte
 Server und Client kommunizieren über REST-Calls. Der Client sendet je nach gewünschter Funktionalität / Endpunkt eine Anfrage an den Server, welche dann entsprechend beantwortet wird. 
