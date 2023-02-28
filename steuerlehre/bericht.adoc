@@ -46,6 +46,8 @@ Ein Sachverhalt, nachfolgend auch Case gennant, ist die Repräsentation der notw
 
 Diese Informationen werden pro Sachverhalt einzeln gespeichert und durch einen Klasse (case.py) abgebildet. Für jeden Sachverhalt werden neuen Klassen instanziiert und mit entsrpechenden Werten gefüllt, welche auch nachträglich durch Getter und Setter manipuliert / ausgelesen werden können.
 Die Klasse hält die notwendigen Infromationen wie folgt
+
+.Case Klasse
 [source,python]
 ____
     class Case:
@@ -59,6 +61,8 @@ ____
 
 ===== Pool / Auswahl an Sachverhalten (Nodepool)
 Um alle instanziierten Sachverhalte in einer Datenstruktur halten zu können, benötigt es eine, dem Case übergeordnete, Datenstruktur. Zuerst habe ich versucht, auch im Hinblick auf die Generierung, die Datenstruktur als Graph aufzubauen, bei der jeder Case ein eigener Unterknoten und die Blätter des Knotens die Informationen zum Case sind. Da dieser Ansatz im Aufbau nicht sehr intuitiv war, habe ich mich im Nachhinein für eine "Pool" entscheiden. Dieser Pool hält eine Liste an Sachverhalten und stellt Methoden bereit um gezielt oder zufällig Sachverhalte aus dem Pool auszuwählen, aber auch einzelne Sachverhalte hinzuzufügen oder zu löschen. Diese Funktionalität bildet die Klasse nodepool.py ab, welche ein direktes Zusammenspiel mit der case.py Klasse bildet. 
+
+.NodePool Klasse
 [source, python]
 ____
     class NodePool:
@@ -133,7 +137,7 @@ Der Aufgaben- / Task-Endpunkt nimmt diese drei Parameter entgegen und wählt mit
 image:mask-variations.png[]
 Für eine gesamte Übersicht der Tasks in der Sitzung des Nutzers, hält der Server eine Liste an Tasks, welche bei jeder neuen Generierung um den neuen Task erweitert wird.
 
-Task-Klasse
+.Task-Klasse
 [source, python]
 ____
     class Task:
@@ -183,6 +187,36 @@ image:frontend-folder.png[]
 ===== Einzelne Komponenten
 Im Folgenden erkläre ich alle Komponenten die ich im Frontend verwendet habe, dabei setzte ich grundglegendes Wissen in Vuejs / Javascript voraus. Für das Styling wird das CSS-Framework Bootstrap verwendet.
 
+====== store.js
+Der Store stellt eine _reactive_ Komponente in Vuejs dar. Diese Komponente ist dazu da, Daten zwischen Komponenten auszutauschen. In meinem Anwendungsfall ist es am sinnvollsten, die aktuelle Task-ID, den Error sowie die Liste an Sätzen der Sachverhalte im Store zu speichern. Durch die _watch_ Lifecycle Methode in Vuejs, können diese Werte einzeln überwacht werden und dynamisch bei Änderung gehandelt werden.
+
+.Store.js Datei
+[source, javascript]
+____
+    import { reactive } from 'vue';
+
+    export let store = reactive({
+        task_id: null,
+        sentences: [],
+        error: ""
+    });
+____
+
+.Überwachung eines Store-Wertes
+[source, javascript]
+____
+    computed: {
+        task_id() {
+            return store.task_id
+        }
+    },
+    watch: {
+        task_id() {
+            this.getGeneratedTasks()
+        }
+    }
+____
+
 ====== MainAppComponent
 Der MainAppComponent vereint alle Komponenten der Vuejs Anwendung in einem zentralen Bootstrap Layout. Hier gibt es einen zentralen Container, der mehrere Bootstrap Rows beinhaltet. Auf der erstene Row findet sich der `AllTasksComponent`, welcher sich je nach Anzahl der Tasks skaliert und wächst. Darunter befinden sich der `TaskSentenceComponent` mit dem `CostumizeTaskComponent` auf einer Ebene. Beide Komponenten werden dabei zentriert und beanspruchen gleich viel Platz in der Horizontalen. Darunter folgen, jeweils in separaten Reihen, der `UserSolutionComponent`, zur Lösung des Users, der `GivenSolutionComponent` als vorgegebende Lösung, sowie der `ErrorComponent`, für mögliche Fehler in der Anwendung. Die Komponente hat sonst keine Funktionalität.
 
@@ -191,6 +225,7 @@ image:ui-konzept.png[]
 ====== AllTasksComponent
 Im AllTasksComponent werden alle aktuellen Tasks dargestellt, welche vom Server generiert wurden. Hierbei wird für jeden Task ein button generiert der mit der ID des Tasks versehen wird. Je nachdem ob der Task gelöst wurde, wird entweder ein roter Button (nicht gelöst) oder ein grüner Button (gelöst) generiert. Die Komponente fragt je nach Änderung der im Store gespeicherten Task-ID den `/generated-tasks` Endpunkt ab und erhält ein JSON der aktuell generierten Tasks vom Server. 
 
+.Methode um generierte Tasks abzufragen
 [source, javascript]
 ____
     getGeneratedTasks() {
@@ -202,6 +237,96 @@ ____
             });
     }
 ____
+
+====== TaskSentenceComponent
+In dieser Komponente werden alle, im Store als Liste gespeicherten Sätze, in der UI angezeigt. Um diese FUnktionalität zu erreichen, wird eine _computed_ Methode verwendet, deren Rückgabewert in einer Schleife alle Sätze, mit zusätzlichem Leerzeichen, ausgibt. 
+
+.Computed Methode
+[source, javascript]
+____
+    computed: {
+        sentences() {
+            return store.sentences;
+        }
+    }
+____
+
+.Iterieren über die Liste der Sätze
+[source, html]
+____
+    <template v-for="sentence in sentences">
+        {{ sentence }}{{ " " }}
+    </template>
+____
+
+====== CostumizeTaskComponent
+Um die Parameter der generierten Aufgaben zu beeinflussen, wird der CostumizeTaskComponent verwendet. Basis für die Parameter bilden die Vuejs data values, welche für jeden Parameter vorhanden sind. Diese Daten werden über das _v-model_ Binding auf die Input Felder gemapt. Bei den _needed_ wird dynamisch eine Gruppe an Checkboxen erstellt, welche dann auf die Needed Liste in den Daten gemapt wird. 
+
+.Daten der Parameter
+[source, javascript]
+____
+    data() {
+        return {
+            allCases: [],
+            difficultyValue: 3,
+            amountValue: 8,
+            needed: []
+        }
+    }
+____
+
+Wird die Komponente gemounted, wird der Endpunkt angesprochen, welcher alle verfügbaren Case Typen angibt, um eine Liste bereitzustellen, aus der der Nutzer die geünscht enthaltenen Cases auswählen kann. 
+
+.Holen der Verfügbaren Cases
+[source, javascript]
+____
+    getCasesToChoose: function () {
+            const url = "http://localhost:8000/cases-to-choose";
+            axios.get(url).then((res) => {
+                this.allCases = res.data;
+            });
+
+    }
+____
+
+Sind die Parameter festgelegt, kann der Nutzer die Aufgabe über einen Button anfragen. Beim Click wird zuerst der Query String aufgebaut, wobei vorhandene Parameter in ein JSON Object übertragen werden. Danach werden die einzelnen Parameter auf ihren Datentyp geprüft und ob sie gesetzt sind, um sie in einen Querystring für den Request zu übertragen. 
+
+.Übertragen der Daten und Bauen des Query Strings
+[source, javascript]
+____
+    buildURL() {
+            const params = {
+                difficulty: this.difficultyValue,
+                amount: this.amountValue,
+                needed: this.needed
+            }
+            const queryString = Object.keys(params).map(key => (this.isVariableAndNotEmpty(params[key]) ? `${key}=${params[key]}` : null)).filter(Boolean).join('&');
+            const url = `http://localhost:8000/get-task?${queryString}`;
+            return url;
+    }
+____
+
+Mit diesem Querystring wird der Request gegen den Endpunkt geschickt und die, nach den Parametern generierte Aufgabe wird empfangen und ihr Inhalt den korrekten Variablen zugewiesen.
+
+.Gesamte Methode zur Anfrage eines Tasks
+[source, javascript]
+____
+    async getTask() {
+            const url = this.buildURL();
+            console.log(url)
+            await axios.get(url)
+                .then((res) => {
+                    store.sentences = res.data.sentences;
+                    store.task_id = res.data.id;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+____
+
+===== UserSolutionComponent
+Der UserSolutionComponent ist die Komponente mit der meisten Logik. In dieser löst der Nutzer die 
 
 ===== Kommunikation von Server und Client / Endpunkte
 Server und Client kommunizieren über REST-Calls. Der Client sendet je nach gewünschter Funktionalität / Endpunkt eine Anfrage an den Server, welche dann entsprechend beantwortet wird. 
