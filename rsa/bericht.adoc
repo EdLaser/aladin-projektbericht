@@ -3,9 +3,22 @@
 == 6. RSA Verschlüsselung
 
 === 6.1. Aufgabenbeschreibung
+[#tasks]
 ==== Aufgabenstellung
-Mithilfe dieses Aufgabentyps sollen Studierenden das RSA Verschlüsselungsverfahren verstehen und anwenden lernen. Die Studierenden müssen Schritt für Schritt durch die Aufgaben geführt und es sollen geeignete Lösungshilfen angezeigt werden können mit denen die Studierenden in der Lage sind Schritt für Schritt die Lösungen der Aufgaben erarbeiten. Zudem soll es unterschiedliche Schwierigkeitsgrade geben, bei denen die Studierenden stärker an die Hand genommen werden oder mehr Freiheit gegeben wird um die Aufgaben nach den eigenen Vorstellungen zu lösen. 
+Mithilfe dieses Aufgabentyps sollen Studierenden das RSA Verschlüsselungsverfahren verstehen und anwenden lernen. Die Studierenden müssen Schritt für Schritt durch die Aufgaben geführt werden. Zusätzlich sollen geeignete Lösungshilfen vorhanden sein, mit denen die Studierenden in der Lage sind Schritt für Schritt die Lösungen der Aufgaben erarbeiten. Durch unterschiedliche Schwierigkeitsgrade, bei denen die Studierenden stärker an die Hand genommen werden oder mehr Freiheit gegeben wird, können die Studieren ihre Fähigkeiten auf jeden jeweiligen Lernstand anpassen.
 
+[#task_types]
+==== Aufgabentypen
+. Generierung des öffentlichen und des privaten Schlüssels
+. Verschlüsselung von Zahlen und Text
+. Entschlüsselung von Zahlen und Text
+. Wählen einer teilerfremden Zahl bei gegebenen Werten
+
+[#exercise]
+===== Beispiel
+image::example_exercise.png[pdfwidth=450px, width=450px]
+
+[#requirements]
 ==== Anforderungen
 * Zufällige Generierung der vorgegebenen Zahlen
 * Schrittweise Anleitung
@@ -15,6 +28,55 @@ Mithilfe dieses Aufgabentyps sollen Studierenden das RSA Verschlüsselungsverfah
 
 === 6.2. Planung
 === 6.3. Umsetzung
+[#technologies]
+==== Verwendete Technologien
+
+. Vite (Development-Server und Build Tool)
+. ReactJS (JavaScript-Programmbibliothek zur Erstellung von webbasierten Benutzeroberflächen)
+. TypeScript (Superset von JavaScript mit Typsystem und besserer Objektorientierung)
+
+[#architecture]
+==== Architektur
+Im Idealfall sollte die Webapplikation aus einem Server bestehen, auf welchem die Aufgaben generiert werden und welcher die Rechenlast für die Verschlüsselungsaufgaben trägt und einem Client. Der Client würde dann nur die Aufgaben darstellen und mit dem Server kommunizieren.
+Aktuell ist es so, dass die gesamte Logik im Client ausgeführt wird (FatClient) eine Aufteilung in den klassischen Server-Client ist noch nicht erfolgt. Somit ist die Geschwindikeit der Applikation wesentlich von den Ressourcen des Clients abhängig.
+
+[#structure_backend]
+==== Programmaufbau - Backend
+image::diagram_25_02_23.svg[]
+
+[#sequence_frontend]
+==== Sequenzdiagram - Frontend
+image::activity_diagram_frontend.svg[]
 
 === 6.4. Probleme
-=== 6.5. Ausblick
+* Geschwindikeit der Applikation ist von der Rechenleistung des Clients abhängig siehe
+link:#architecture[Architektur]
+* Größe des BigInt in TypeScript
++
+Die Verschlüsselung von Text war ursprünglich mittels Bytestream geplant. Dadurch entstehen allerdings sehr schnell sehr große Zahlen, welche so in der gewählten Programmiersprache (TypeScript) nicht darstellbar waren und mit welchen nicht gerechnet werden konnte. Deshalb erfolgt die Verschlüsselung von Text Buchstabe-für-Buchstabe.
+* Nicht darstellbare ASCII-Zeichen z.Bsp. Backslash, LineFeed, ...
++
+Einige Ascii-Zeichen lassen sich nicht wirklich darstellen, diese haben in meinem Programm eine eigene Darstellung bekommmen = [*]. Für die Verwertung dieser Strukuren mussten komplexere Funktionen geschrieben werden, welche die Zeichenketten aus dem gesamt String extrahieren und umwandeln konnten.
++
+image::asciitable.png[]
+* Wertebereich für das Ver-/Entschlüsseln von Text
++
+Es sollen ausschließlich Ascii-Zeichen und keine Unicode Zeichen angezeigt werden. Unicode-Zeichen sind vorallem für deutschsprachige Studierende schwer zu deuten (asiatische Schriftzeichen).
+Deshalb werden immer die selben Schlüssel für das Ver-/Entschlüsseln von Text verwendet. 
++
+====
+const rsaString = new Rsa({p: 3, q: 43, e: 5});
+====
+
+=== 6.5. Ergebnis und Ausblick
+. Erweiterung um Textkomprimierung z.Bsp. Huffman-Code
+. Interaktive Lösungshilfen
++
+Studierende können direkt in den Lösungshilfen z.Bsp. Tabellen ausfüllen und diese auch als Lösung einreichen.
+. BackEnd mit REST-Schnittstellen
+. Programm um einen Prüfungsmodus erweitern
+. Zwischenschritte der Studierenden mitspeichern, um die Aufgabe im Nachhinein nocheinmal durchzugehen
+
+// Commits und Folien nochmal durchschauen und das wichtigste aufschreiben.
+// Automatische Dokumentation für das Programm erstellen und mit einreichen.
+

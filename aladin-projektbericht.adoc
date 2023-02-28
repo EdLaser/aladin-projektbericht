@@ -15,3 +15,6 @@ include::./epk/bericht.adoc[]
 // include::./sortieralgorithmen/bericht.adoc[]
 // include::./chemie/bericht.adoc[]
 include::./rsa/bericht.adoc[]
+
+== Schluss
+== 7. Gesamt Fazit
