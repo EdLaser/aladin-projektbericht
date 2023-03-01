@@ -125,6 +125,52 @@ image:backend-folder.png[]
 * `/library/task.py` -> Klasse, welche eine Aufgabe mit den einzelnen Fällen darstellt
 * `/library/variations.py` -> Stellt Funktionen des Sprachmodells bereit und bildet die unterschiedlichen Formulierungen für einen Sachverhalt
 
+===== Kommunikation von Server und Client / Endpunkte
+Server und Client kommunizieren über REST-Calls. Der Client sendet je nach gewünschter Funktionalität / Endpunkt eine Anfrage an den Server, welche dann entsprechend vom Server beantwortet wird. Folgende Endpunkte werden vom Server bereitgestellt:
+
+|===
+|Route | Methode | Beschreibung | Beispiel Request
+
+| `/get-task?{query-string}`
+| GET
+| Fragt einen neuen Task je nach den festgelegten Paraemetern in der Query an
+| curl --request GET \
+  --url 'http://localhost:8000/get-task?difficulty=1&amount=5'
+
+
+| `/generated-tasks`
+| GET
+| Gibt alle generierten Tasks aus
+| curl --request GET \
+  --url http://localhost:8000/generated-tasks
+
+| `/cases-to-choose`
+| GET
+| nicht gesetzt
+| _WithDifficultyAndAmount_
+
+| `/solve/{task-id}`
+| POST
+| nicht gesetzt
+| _WithDifficultyAndAmount_
+
+| `/solution/{task-id}`
+| GET
+| nicht gesetzt
+| _WithDifficultyAndAmount_
+
+| `/zve/{task-id}`
+| GET
+| nicht gesetzt
+| _WithDifficultyAndAmount_
+
+| `/select-options/{task-id}`
+| GET
+| nicht gesetzt
+| _WithDifficultyAndAmount_
+
+|===
+
 ===== Generierung der Aufgaben
 Die Aufgaben werden auf Anfrage des Clients je nach Parametern generiert. Folgende Parameter werden im Moment unterstützt:
 
@@ -327,7 +373,6 @@ ____
 
 ===== UserSolutionComponent
 Der UserSolutionComponent ist die Komponente mit der meisten Logik, da der Nutzer in dieser die einzelnen Aufgaben löst. Grundlegend soll der Nutzer die einzelnen Sachverhalte aus der Textaufgabe herauslesen und den korrekten Sachverhaltstypen, sowie die richtige Summe und Gesetzesgrundlage zuweisen, aber auch am Ende das korrekte zu versteuernde Einkommen berechnen. Um Flexibilität und mehr Komplexität in die Lösung der Aufgabe zu bringen, kann der Nutzer einzelne Reihen der Lösung frei hinzufügen oder löschen (Je Funktion für das Hinzufügen (*addRow*) bzw. Löschen (*deleteRow*)). Um nicht zu viele Reihen zuzulassen, ist die maximale Anzahl an Reihen, die Anzahl der Sachverhalte in der Aufgabe. Überpüft wird dies durch die _checkIfRowNecessary_ Methode, bei der abgeglichen wird, ob die Anzahl der Reihen die Anzahl der möglichen Optionen, also die Anzahl der Sachverhalte, überschreiten würde.
-Hierfür besteht die Datenstruktur der Reihen aus einer Liste von JSON Objekten welche mit _v-for_ iterarativ ausgelesen werden, wobei auf jedes Elemenet ein einzelnes Input Element mit v-model gemapt wird.
 
 .Datenstruktur der Riehen
 [source, Javascript]
@@ -339,6 +384,8 @@ ____
         }
     ]
 ____
+
+Hierfür besteht die Datenstruktur der Reihen aus einer Liste von JSON Objekten welche mit _v-for_ iterarativ ausgelesen werden, wobei auf jedes Elemenet ein einzelnes Input Element mit v-model gemapt wird. Die Input Felder erhalten zur eindeutigen Identifikation eine dynamische ID durch das HTML id-Attribut, mit der Syntax: rowID + "_case_name" bzw."_law" oder "_num". Durch diese dynamische Zuweisung kann jeder Wert jeder Reihe eindeutig identifiziert und zur Reihe zugeordnet werden.
 
 .Mapping mit v-for
 [source, HTML]
@@ -380,13 +427,50 @@ ____
     }
 ____
 
-Weitere Datenattribute sind die korrekt gelösten Reihen (*correct*), welche aus dem Ergebnis des Lösungsrequest ausgelesen werden. Dabei wird angegeben welche Spalte welcher Reihe korrekt oder nicht korrekt ist. Dabei werden je nach Änderung des *correct* Wertes die Korrektheit der Reihen geprüft. Um die Korrektheit zu prüfen, wird die Methode _evaluateCorrectnessOfRow_ aufgerufen. Sie prüft für jede Reihe aus dem *correct* Felfd ob die einzelen Spalten richtig sind. Falls sie richtig sind, wird die korrekte Spalte grün umrandet (Bootstrap Klassse) und deaktiviert, sodass sie nicht nachträglich zum falschen geändert werden kann.
+Weitere Datenattribute sind die korrekt gelösten Reihen (*correct*), welche aus dem Ergebnis des Lösungsrequest ausgelesen werden. Dabei wird angegeben welche Spalte welcher Reihe korrekt oder nicht korrekt ist. Dabei werden je nach Änderung des *correct* Wertes die Korrektheit der Reihen geprüft. Um die Korrektheit zu prüfen, wird die Methode _evaluateCorrectnessOfRow_ aufgerufen. Sie prüft für jede Reihe aus dem *correct* Felfd ob die einzelen Spalten richtig sind. Falls sie richtig sind, wird die korrekte Spalte grün umrandet (Bootstrap Klassse) und deaktiviert, sodass sie nicht nachträglich zum falschen geändert werden kann. Außerdem gibt es weiterhin das Attribut *allSolved*, welches bei jeder Lösung aus der JSON Response des Servers ausliest ob alle Aufgaben korrekt gelöst wurden. Wenn ja, wird eine entsrpechende Nachricht angezeigt. Für das zu versteuernde Einkommen, gibt es ein Attribut für seinen Wert (*zveValue*) und für seine Korrektheit (*zve*). Der zveValue wird für das Input Mapping in Vuejs verwendet, der zve wird verwendet um zu prüfen ob das zve korrekt angegeben wurde.
+Soll eine Aufgabe gelöst werden, kann dies über einen Button "Aufgabe Lösen" durchgeführt werden. Wird der Button geclickt, werden alle Reihen als JSON Payload eines POST-Request an den Server zur Kontrolle geschickt. Ergebnis wird einerseits dem *correct*, für die einzelnen Reihen und deren korrekte Werte, sowie *allSolved*, für den Check ob alle Aufgaben gelöst wurden, Attribut zugewiesen.
 
-Auch diese Komponente greift auf den Store zu, um zu prüfen ob ein neuer Task vorliegt. Liegt ein neuer Task vor, wird die _reset_ Methode ausgeführt, welche alle Daten in der Komponente, sowie alle Klassen / Disabled Attribute der Input Elemente zurücksetzt (falls sie korrekt oder falsch waren). 
+.Reihe Lösen
+[source, Javascript]
+____
+    solveTask() {
+        const url = 'http://localhost:8000/solve/' + store.task_id
+        const data = JSON.stringify(this.rows);
+        axios.post(url, data, { headers: { 'Content-Type': 'application/json' } }).then((res) => {
+            this.correct = res.data.given
+            this.allSolved = res.data.all_solved
+        }).catch((error) => {
+            store.error = error.response.data.detail;
+        });
+    }
+____
 
+Auch diese Komponente greift auf den Store zu, um zu prüfen ob ein neuer Task vorliegt. Liegt ein neuer Task vor, wird die _reset_ Methode ausgeführt, welche alle Daten in der Komponente, sowie alle Klassen / Disabled Attribute der Input Elemente zurücksetzt (falls sie korrekt oder falsch waren).
 
-===== Kommunikation von Server und Client / Endpunkte
-Server und Client kommunizieren über REST-Calls. Der Client sendet je nach gewünschter Funktionalität / Endpunkt eine Anfrage an den Server, welche dann entsprechend beantwortet wird. 
+.Reste Methode
+[source, Javascript]
+____
+    reset() {
+        this.options = [""],
+            this.rows = [
+                {
+                    'id': 0, 'select': "Sachverhalt auswählen", "law": '',
+                    "num": null
+                }
+            ]
+        for(let row of this.rows) {
+            document.getElementById(row.id + "_case_name").className = "form-control"
+            document.getElementById(row.id + "_law").className = "form-control"
+            document.getElementById(row.id + "_num").className = "form-control"
+            document.getElementById("zvE").className = "form-control"
+
+        }
+        this.correct = {}
+        this.allSolved = false
+        this.zve = false
+        this.zveValue = null
+    }
+____
 
 === Ergebnisse
 
