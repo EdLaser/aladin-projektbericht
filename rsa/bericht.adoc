@@ -1,4 +1,5 @@
 :imagesdir: img
+:plantumlsdir: puml
 
 == RSA Verschlüsselung
 
@@ -17,7 +18,7 @@ Mithilfe dieses Aufgabentyps sollen Studierenden das RSA Verschlüsselungsverfah
 [#exercise]
 ===== Beispiel
 .Beispielaufgabe RSA
-image::example_exercise.png[pdfwidth=450px, width=450px]
+image::example_exercise.png[pdfwidth=450px, width=450px, scaledwidth=450px]
 
 [#requirements]
 ==== Anforderungen
@@ -29,27 +30,47 @@ image::example_exercise.png[pdfwidth=450px, width=450px]
 
 === Umsetzung
 
-==== Projektverlauf tbd.
-Wie kann das Programm gestalltet werden, damit es möglichst gut durch den Benutzer konfiguriert werden kann und dass sogut wie kein Hardcoding stattfinden muss?
+==== Projektverlauf
 
-. Konsolenprogramm
+.Zeitlicher Ablauf - Überblick
+image::timeline.png[width=40%, pdfwidth=40%,scaledwidth=40%]
 
-.Konsolenprogramm für die Konfiguration
-image:ConsoleProgramm.png[]
-. Webapplikation
+==== Konsolenprogramm
+Mithilfe eines einfachen Konsolenprogramms sollten die Basisfunktionen getestet werden können. Dadurch ist auch eine besserer Beurteilung aus Sicht der Benutzenden möglich.
 
-Striktes TypeScript wodurch teilweise erheblich mehr Aufwand in eine saubere Lösung investiert werden musste
+.Konsolenprogramm
+image::ConsoleProgramm.png[]
 
-Mehrfaches Refactoring
-Dauerhafte Validierung der Benutzereingaben -> diese können erst weiter, wenn die vorherige Aufgabe richtig gelöst wurde.
-image:validation_separate.png[]
-Barrierefreiheit, automatischer Fokus aber auch komplexere Konfiguration der Felder (Validierungsbiliothek selbst geschrieben)
-image:validation_basic.png[]
-Programmierung der Lösungshilfen
+==== Webapplikation
+Eine Webapplikation bietet meherer Vorteile, zum einen lässt sie sich relativ schnell in andere Applikationen integrieren auf der anderen Seite lässt sie sich mit fast allen Geräten anzeigen und bedienen. Im Verglieich zur Konsolenanwendung bietet die Webapplikation eine intuitive Bedienung und wirkt für den Benutzenden ansprechender.
 
-===== Schlussfolgerungen
+.Webapplikation mit Lösungshilfen
+image::webapplication_solutionaids.png[width=80%, pdfwidth=80%,scaledwidth=80%]
+
+==== Inputvalidierung
+Nutzereingaben müssen validiert werden, bevor diese durch das Programm verarbeitet werden. Dafür wurden zwei Ansätze getestet.
+|===
+|Inputvalidierung - separat|Inputvalidierung - bubble
+|image:validation_separate.png[]
+|image:validation_basic.png[]
+|===
+Die Variante mit den "bubbles" bietet bessere Barrierefreiheit, da sie in einfacher Form durch fast alle gängigen Browser unterstützt wird, allerdings auch eine komplexere und verteilte Konfiguration. _Hierfür wurde ein separates Modul geschrieben welches eine übersichliche und gesammelte Konfiguration der Felder ermöglicht._
+
+==== Fazit zur Umsetzung
+
+Bei der Umsetzung galt es einiges zu beachten, um die obigen link:#requirements[Anforderungen] zu erfüllen und eine möglichst gute Softwarequalität zu erreichen.
+
+Mir war es wichtig, dass die Software möglichst flexibel bleibt und konfiguriert, statt hardcodiert wird. Dafür mussten geeignete Konzepte, wie dem Konfigurationshandler, entwickelt werden. Auch die Verwendung von generischen Konstrukoren war mir neu und hat zu einer besseren Code-Qualität beigetragen.
+
+Die Verwendung von TypeScript hat mir eine bessere Objektorientierung ermöglicht, jedoch verursacht das strikte Typsystem auch einen Mehraufwand, welcher in eine saubere Lösung investiert werden muss. Allerdings ist die Software dadurch nicht mehr so anfällig für Fehler, da die meisten spätestens beim kompillieren behoben werden müssen.
+
+Generell musste ich die Software mehrfach refactoren, da sich neue Zusammenhänge ergeben haben und auch der Wechsel vom Konsolenprogramm zur Webapplikation größere architektonische Veränderungen mit sich gebracht haben.
+
+Die Konzipierung und Programmierung übersichtlicher und verständlicher Lösungshilfen, war mir sehr wichtig, da die Studierenden vorallem durch diese vorrangebracht werden. Deshalb habe ich probiert die Lösungshilfen so verständlich und übersichtlich wie möglich zu gestalten.
+
+===== Schlussfolgerungen für den Quellcode
 . Generische Konstruktoren
-. Verwendung eines Konfigurtors, welcher entscheidet, welche Klassen instanziiert werden
+. Verwendung eines Konfigurators, welcher entscheidet, welche Klassen instanziiert werden
 . Mappings um komplexe `if-else`-Konstrukte oder `switch-case` zu vermeiden
 
 [#technologies]
@@ -96,6 +117,7 @@ image::encode_decode_step_by_step.png[]
 +
 Einige Ascii-Zeichen lassen sich nicht wirklich darstellen, diese haben in meinem Programm eine eigene Darstellung bekommmen = [*]. Für die Verwertung dieser Strukuren mussten komplexere Funktionen geschrieben werden, welche die Zeichenketten aus dem gesamt String extrahieren und umwandeln konnten.
 +
+.Asciitabelle
 image::asciitable.png[]
 * Wertebereich für das Ver-/Entschlüsseln von Text
 +
@@ -105,11 +127,6 @@ Deshalb werden immer die selben Schlüssel für das Ver-/Entschlüsseln von Text
 ====
 const rsaString = new Rsa({p: 3, q: 43, e: 5});
 ====
-
-=== Ergebnisse tbd.
-Das Repository ist link:https://github.com/a-schulz/ALADIN_Cryptography[hier] zu finden.
-Außerdem habe ich eine Auführliche Softwaredokumentation generiert. Diese kann link: [hier] aufgerufen werden.
-*Was habe ich dabei gelernt?tbd*
 
 === Ausblick
 . Erweiterung um Textkomprimierung z.Bsp. Huffman-Code
