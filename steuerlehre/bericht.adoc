@@ -129,45 +129,128 @@ image:backend-folder.png[]
 Server und Client kommunizieren über REST-Calls. Der Client sendet je nach gewünschter Funktionalität / Endpunkt eine Anfrage an den Server, welche dann entsprechend vom Server beantwortet wird. Folgende Endpunkte werden vom Server bereitgestellt:
 
 |===
-|Route | Methode | Beschreibung | Beispiel Request
+|Route | Methode | Beschreibung | Beispiel Request | Beispiel Response
 
 | `/get-task?{query-string}`
 | GET
 | Fragt einen neuen Task je nach den festgelegten Paraemetern in der Query an
 | curl --request GET \
   --url 'http://localhost:8000/get-task?difficulty=1&amount=5'
-
+| {
+	"id": 5,
+	"sentences": [
+		"Die Arbeitnehmerin meldet Heizkosten von 500€ an.",
+		"Dabei setzt Arbeitnehmerin Abschreibungen von 500€ an.",
+		"Arbeitnehmerin [unused_punctuation3] setzt Abschreibungen von 500€ an.",
+		"Pro Unternehmensbeteiligung bekommt G 29000€.",
+		"Derzeit vermietet sie eine Unterkunft für 650€."
+	]
+}
 
 | `/generated-tasks`
 | GET
 | Gibt alle generierten Tasks aus
 | curl --request GET \
   --url http://localhost:8000/generated-tasks
+| {
+	"0": false,
+	"1": false,
+	"2": false,
+	"3": false,
+	"4": false,
+	"5": false
+}
 
 | `/cases-to-choose`
 | GET
-| nicht gesetzt
-| _WithDifficultyAndAmount_
+| Liste an Cases, die vom Server genutzt werden
+| curl --request GET \
+  --url http://localhost:8000/cases-to-choose
+| [
+	"Gehalt-WK",
+	"Vermietung-WK",
+	"Abschreibung",
+	"Gehalt",
+	"Beteiligung",
+	"Dividende",
+	"Vermietung"
+]
 
 | `/solve/{task-id}`
 | POST
-| nicht gesetzt
-| _WithDifficultyAndAmount_
+| Löst die Aufgabe mit der festegelegten ID und dem mitgegebenen Payload
+| curl --request POST \
+  --url http://localhost:8000/solve/0 \
+  --header 'Content-Type: application/json' \
+  --data '[
+	{
+		"id": 0,
+		"select": "Gehalt-WK",
+		"law": "awdadwa",
+		"num": 1150
+	},
+	{
+		"id": 1,
+		"select": "Gehalt",
+		"law": "awdadwa",
+		"num": 1100
+	}
+    ]'
+| {
+	"given": {
+		"1": {
+			"name": true,
+			"law": false,
+			"num": false
+		}
+	},
+	"all_solved": false
+}
 
 | `/solution/{task-id}`
 | GET
-| nicht gesetzt
-| _WithDifficultyAndAmount_
+| Komplette Lösung zur Aufgabe mit der ID
+| curl --request GET \
+  --url http://localhost:8000/solution/0
+| [
+	{
+		"case_name": "Abschreibung",
+		"law": "§9 Abs. 1",
+		"number": 1900,
+		"type_of_case": "Ausgabe",
+		"hint": ""
+	},
+	{
+		"case_name": "Dividende",
+		"law": "§20 Abs. 9",
+		"number": 97000,
+		"type_of_case": "Einnahme",
+		"hint": ""
+	}
+]
 
 | `/zve/{task-id}`
 | GET
-| nicht gesetzt
-| _WithDifficultyAndAmount_
+| Zu versteuerndes Einkommen zur Aufgabe mit der ID
+| curl --request GET \
+  --url http://localhost:8000/zve/1
+| 7350
 
 | `/select-options/{task-id}`
 | GET
-| nicht gesetzt
-| _WithDifficultyAndAmount_
+| Optionen für das Select Feld zur Aufgabe mit der ID
+| curl --request GET \
+  --url http://localhost:8000/select-options/0
+| {
+	"0": {
+		"name": "Vermietung",
+		"value": 650
+	},
+	"1": {
+		"name": "Gehalt",
+		"value": 4500
+	}
+}
 
 |===
 
