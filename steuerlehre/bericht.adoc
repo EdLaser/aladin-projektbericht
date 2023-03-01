@@ -530,7 +530,7 @@ ____
 
 Auch diese Komponente greift auf den Store zu, um zu prüfen ob ein neuer Task vorliegt. Liegt ein neuer Task vor, wird die _reset_ Methode ausgeführt, welche alle Daten in der Komponente, sowie alle Klassen / Disabled Attribute der Input Elemente zurücksetzt (falls sie korrekt oder falsch waren).
 
-.Reste Methode
+.Reset Methode
 [source, Javascript]
 ____
     reset() {
@@ -554,6 +554,74 @@ ____
         this.zveValue = null
     }
 ____
+
+====== GivenSolutionComponent
+Der GivenSolutionComponent stellt für die aktuelle Aufgabe die komplette Lösung bereit. Diese wird in Form einer Tabelle dargestellt, bei der die Zuordung der rechtlichen Grundlage, sowie der Summe zum Sachverhalt erfolgt. Die Komponenten hält nur zwei Attribute, das zu versteuernde Einkommen sowie die Lösungen.
+
+.Daten des GivenSolutionComponent
+[source, Javascript]
+____
+    data() {
+        return {
+            solutions: [],
+            zve: null
+        }
+    }
+____
+
+Um die Lösung beim Server anzufragen, wird beim Klicken auf den "Lösung anzeigen" Button, die Lösung über eine Request angefragt und darauf als Tabelle dargestellt. Die notwendige ID der aktuellen Aufgabe für den Request, wird dabei aus dem Store entnommen. Im gleichen Atemzug fragt die Komponente ebenfalls das zu versteuernde Einkommen der Aufgabe ab. 
+
+.Methode zum Abfragen der Lösung
+[source, Javascript]
+____
+    getSolution() {
+        if (store.task_id !== null) {
+            const url = "http://localhost:8000/";
+            axios.get(url + "solution/" + store.task_id).then((res) => {
+                this.solutions = res.data;
+                console.log(this.solutions)
+            }).catch((error) => {
+                store.error = error
+            });
+
+            axios.get(url + "zve/" + store.task_id).then((res) => {
+                this.zve = res.data;
+            }).catch((error) => {
+                store.error = error
+            })
+        }
+    }
+____
+
+Die Lösungen werden, wie im Codeausschnit zu erkennen, in die Attribute gespeichert. Beide Attribute werden darauffolgend über Templates im HTML ausgegeben. 
+
+.Ausgabe der Lösung als Tabelle
+[source, HTML]
+____
+    <template v-if="solutions !== []">
+        <template v-for="solution in this.solutions">
+            <tr>
+                <td>
+                    {{ solution.case_name }}
+                </td>
+                <td>
+                    {{ solution.law }}
+                </td>
+                <td>
+                    {{ solution.number }}
+                </td>
+            </tr>
+        </template>
+    </template>
+    <tr>
+        <td>zvE</td>
+        <td></td>
+        <td>{{ zve }}</td>
+    </tr>
+____
+
+====== ErrorComponent
+Beim ErrorComponent wird lediglich ein Error im unteren Bereich der Seite angegeben. Dies wird realisiert, indem die Komponente auf den im Store gespeicherten Error bei Änderung zugreift und diese einfach in einer Row ausgibt. Als Attribute besitzt die Komponente hier nur den Store.
 
 === Ergebnisse
 
