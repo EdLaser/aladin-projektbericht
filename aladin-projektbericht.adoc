@@ -12,8 +12,8 @@ include::./default-attributes.inc.adoc[]
 include::./steuerlehre/bericht.adoc[]
 include::./epk/bericht.adoc[]
 // include::./sortieralgorithmen/bericht.adoc[]
-// include::./chemie/bericht.adoc[]
+include::./chemie/bericht.adoc[]
 include::./rsa/bericht.adoc[]
 
 == Schluss
-== 7. Gesamt Fazit
+== Gesamt Fazit

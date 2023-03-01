@@ -16,6 +16,7 @@ Mithilfe dieses Aufgabentyps sollen Studierenden das RSA Verschlüsselungsverfah
 
 [#exercise]
 ===== Beispiel
+.Beispielaufgabe RSA
 image::example_exercise.png[pdfwidth=450px, width=450px]
 
 [#requirements]
@@ -26,8 +27,31 @@ image::example_exercise.png[pdfwidth=450px, width=450px]
 * Verständliche Lösungshilfen
 * Vollständige Lösung
 
-=== Planung
 === Umsetzung
+
+==== Projektverlauf tbd.
+Wie kann das Programm gestalltet werden, damit es möglichst gut durch den Benutzer konfiguriert werden kann und dass sogut wie kein Hardcoding stattfinden muss?
+
+. Konsolenprogramm
+
+.Konsolenprogramm für die Konfiguration
+image:ConsoleProgramm.png[]
+. Webapplikation
+
+Striktes TypeScript wodurch teilweise erheblich mehr Aufwand in eine saubere Lösung investiert werden musste
+
+Mehrfaches Refactoring
+Dauerhafte Validierung der Benutzereingaben -> diese können erst weiter, wenn die vorherige Aufgabe richtig gelöst wurde.
+image:validation_separate.png[]
+Barrierefreiheit, automatischer Fokus aber auch komplexere Konfiguration der Felder (Validierungsbiliothek selbst geschrieben)
+image:validation_basic.png[]
+Programmierung der Lösungshilfen
+
+===== Schlussfolgerungen
+. Generische Konstruktoren
+. Verwendung eines Konfigurtors, welcher entscheidet, welche Klassen instanziiert werden
+. Mappings um komplexe `if-else`-Konstrukte oder `switch-case` zu vermeiden
+
 [#technologies]
 ==== Verwendete Technologien
 
@@ -40,21 +64,35 @@ image::example_exercise.png[pdfwidth=450px, width=450px]
 Im Idealfall sollte die Webapplikation aus einem Server bestehen, auf welchem die Aufgaben generiert werden und welcher die Rechenlast für die Verschlüsselungsaufgaben trägt und einem Client. Der Client würde dann nur die Aufgaben darstellen und mit dem Server kommunizieren.
 Aktuell ist es so, dass die gesamte Logik im Client ausgeführt wird (FatClient) eine Aufteilung in den klassischen Server-Client ist noch nicht erfolgt. Somit ist die Geschwindikeit der Applikation wesentlich von den Ressourcen des Clients abhängig.
 
+===== Backend
 [#structure_backend]
-==== Programmaufbau - Backend
+.Programmaufbau - Backend
 image::diagram_25_02_23.svg[]
 
+===== Frontend
 [#sequence_frontend]
-==== Sequenzdiagram - Frontend
+.Programmaublauf - Frontend
 image::activity_diagram_frontend.svg[]
 
 === Probleme
 * Geschwindikeit der Applikation ist von der Rechenleistung des Clients abhängig siehe
 link:#architecture[Architektur]
+* Ver-/Entschlüsselung lief mit dem Datentyp `number` nicht immer zuverlässig, da hier unter Umständen die Zahlen abgeschnitten wurden => Einführung `BigInt`
 * Größe des BigInt in TypeScript
 +
-Die Verschlüsselung von Text war ursprünglich mittels Bytestream geplant. Dadurch entstehen allerdings sehr schnell sehr große Zahlen, welche so in der gewählten Programmiersprache (TypeScript) nicht darstellbar waren und mit welchen nicht gerechnet werden konnte. Deshalb erfolgt die Verschlüsselung von Text Buchstabe-für-Buchstabe.
-* Nicht darstellbare ASCII-Zeichen z.Bsp. Backslash, LineFeed, ...
+Die Verschlüsselung von Text war ursprünglich mittels Bytestream geplant. Dadurch entstehen allerdings sehr schnell sehr große Zahlen und Schlüssel, welche so in der gewählten Programmiersprache (TypeScript) nicht darstellbar waren und mit welchen nicht gerechnet werden konnte.
++
+.Probleme mit der Größe des BigInt
+|===
+|image:problem_bytestream.png[]|image:bitint_exceeded.png[]
+
+|===
++
+Von nun an erfolgt die Verschlüsselung von Text Buchstabe-für-Buchstabe. Vorteil dieser Variante, ist es, dass es für die Studierenden leicht zu verstehen und einfacher in der Anwendung ist.
++
+.Verarbeitung des Textes Schritt für Schritt
+image::encode_decode_step_by_step.png[]
+* Nicht darstellbare ASCII-Zeichen z.Bsp. Backslash, LineFeed
 +
 Einige Ascii-Zeichen lassen sich nicht wirklich darstellen, diese haben in meinem Programm eine eigene Darstellung bekommmen = [*]. Für die Verwertung dieser Strukuren mussten komplexere Funktionen geschrieben werden, welche die Zeichenketten aus dem gesamt String extrahieren und umwandeln konnten.
 +
@@ -68,15 +106,24 @@ Deshalb werden immer die selben Schlüssel für das Ver-/Entschlüsseln von Text
 const rsaString = new Rsa({p: 3, q: 43, e: 5});
 ====
 
-=== Ergebnis und Ausblick
+=== Ergebnisse tbd.
+Das Repository ist link:https://github.com/a-schulz/ALADIN_Cryptography[hier] zu finden.
+Außerdem habe ich eine Auführliche Softwaredokumentation generiert. Diese kann link: [hier] aufgerufen werden.
+*Was habe ich dabei gelernt?tbd*
+
+=== Ausblick
 . Erweiterung um Textkomprimierung z.Bsp. Huffman-Code
++
+Zusammen mit der Textkomprimierung und dem RSA Verschlüsselungsverfahren könnte sich eine Komplexaufgabe gestalten lassen.
 . Interaktive Lösungshilfen
 +
-Studierende können direkt in den Lösungshilfen z.Bsp. Tabellen ausfüllen und diese auch als Lösung einreichen.
+Studierende könnten direkt in den Lösungshilfen z.Bsp. Tabellen ausfüllen und diese auch als Lösung einreichen.
 . BackEnd mit REST-Schnittstellen
++
+Klare Trennung und bessere Ressourcennutzung.
 . Programm um einen Prüfungsmodus erweitern
-. Zwischenschritte der Studierenden mitspeichern, um die Aufgabe im Nachhinein nocheinmal durchzugehen
-
-// Commits und Folien nochmal durchschauen und das wichtigste aufschreiben.
-// Automatische Dokumentation für das Programm erstellen und mit einreichen.
-
++
+Denkbar ist eine abschließende Auswertung und Bewertung, wie gut die Aufgaben absolviert wurden und wie viele Fehler gemacht wurden.
+. Zwischenschritte der Studierenden mitspeichern
++
+Dadurch wird es möglich, die gleiche Aufgabe nochmal mit Kommilitonen und Lehrernden durchzugehen, falls Verständnisfragen aufkommen.
