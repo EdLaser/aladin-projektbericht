@@ -1,3 +1,4 @@
+
 :imagesdir: img
 :plantumlsdir: puml
 
@@ -6,7 +7,7 @@
 === Aufgabenbeschreibung
 [#tasks]
 ==== Aufgabenstellung
-Mithilfe dieses Aufgabentyps sollen Studierenden das RSA Verschlüsselungsverfahren verstehen und anwenden lernen. Die Studierenden müssen Schritt für Schritt durch die Aufgaben geführt werden. Zusätzlich sollen geeignete Lösungshilfen vorhanden sein, mit denen die Studierenden in der Lage sind Schritt für Schritt die Lösungen der Aufgaben erarbeiten. Durch unterschiedliche Schwierigkeitsgrade, bei denen die Studierenden stärker an die Hand genommen werden oder mehr Freiheit gegeben wird, können die Studieren ihre Fähigkeiten auf jeden jeweiligen Lernstand anpassen.
+Mithilfe dieses Aufgabentyps sollen Studierenden das RSA Verschlüsselungsverfahren verstehen und anwenden lernen. Die Studierenden müssen Schritt für Schritt durch die Aufgaben geführt werden. Zusätzlich sollen geeignete Lösungshilfen vorhanden sein, mit denen die Studierenden in der Lage sind, Schritt für Schritt die Lösungen der Aufgaben erarbeiten. Durch unterschiedliche Schwierigkeitsgrade, bei denen die Studierenden stärker an die Hand genommen werden oder mehr Freiheit gegeben wird, können die Studierenden ihre Fähigkeiten auf jeden jeweiligen Lernstand anpassen.
 
 [#task_types]
 ==== Aufgabentypen
@@ -36,37 +37,37 @@ image::example_exercise.png[pdfwidth=450px, width=450px, scaledwidth=450px]
 image::timeline.png[width=40%, pdfwidth=40%,scaledwidth=40%]
 
 ==== Konsolenprogramm
-Mithilfe eines einfachen Konsolenprogramms sollten die Basisfunktionen getestet werden können. Dadurch ist auch eine besserer Beurteilung aus Sicht der Benutzenden möglich.
+Mithilfe eines einfachen Konsolenprogramms sollten die Basisfunktionen getestet werden können. Dadurch ist auch eine bessere Beurteilung aus Sicht der Benutzenden möglich.
 
 .Konsolenprogramm
 image::ConsoleProgramm.png[]
 
 ==== Webapplikation
-Eine Webapplikation bietet meherer Vorteile, zum einen lässt sie sich relativ schnell in andere Applikationen integrieren auf der anderen Seite lässt sie sich mit fast allen Geräten anzeigen und bedienen. Im Verglieich zur Konsolenanwendung bietet die Webapplikation eine intuitive Bedienung und wirkt für den Benutzenden ansprechender.
+Eine Webapplikation bietet mehrere Vorteile, zum einen lässt sie sich relativ schnell in andere Applikationen integrieren, auf der anderen Seite lässt sie sich mit fast allen Geräten anzeigen und bedienen. Im Vergleich zur Konsolenanwendung bietet die Webapplikation eine intuitive Bedienung und wirkt für den Benutzenden ansprechender.
 
 .Webapplikation mit Lösungshilfen
 image::webapplication_solutionaids.png[width=80%, pdfwidth=80%,scaledwidth=80%]
 
-==== Inputvalidierung
+==== Input-Validierung
 Nutzereingaben müssen validiert werden, bevor diese durch das Programm verarbeitet werden. Dafür wurden zwei Ansätze getestet.
 |===
-|Inputvalidierung - separat|Inputvalidierung - bubble
+|Input-Validierung - separat|Input-Validierung - Bubble
 |image:validation_separate.png[]
 |image:validation_basic.png[]
 |===
-Die Variante mit den "bubbles" bietet bessere Barrierefreiheit, da sie in einfacher Form durch fast alle gängigen Browser unterstützt wird, allerdings auch eine komplexere und verteilte Konfiguration. _Hierfür wurde ein separates Modul geschrieben welches eine übersichliche und gesammelte Konfiguration der Felder ermöglicht._
+Die Variante mit den "Bubbles" bietet bessere Barrierefreiheit, da sie in einfacher Form durch fast alle gängigen Browser unterstützt wird, allerdings auch eine komplexere und verteilte Konfiguration. _Hierfür wurde ein separates Modul geschrieben, welches eine übersichtliche und gesammelte Konfiguration der Felder ermöglicht._
 
 ==== Fazit zur Umsetzung
 
 Bei der Umsetzung galt es einiges zu beachten, um die obigen link:#requirements[Anforderungen] zu erfüllen und eine möglichst gute Softwarequalität zu erreichen.
 
-Mir war es wichtig, dass die Software möglichst flexibel bleibt und konfiguriert, statt hardcodiert wird. Dafür mussten geeignete Konzepte, wie dem Konfigurationshandler, entwickelt werden. Auch die Verwendung von generischen Konstrukoren war mir neu und hat zu einer besseren Code-Qualität beigetragen.
+Mir war es wichtig, dass die Software möglichst flexibel bleibt und konfiguriert, statt hartcodiert wird. Dafür mussten geeignete Konzepte, wie dem Konfigurationshandler, entwickelt werden. Auch die Verwendung von generischen Konstruktoren war mir neu und hat zu einer besseren Code-Qualität beigetragen.
 
-Die Verwendung von TypeScript hat mir eine bessere Objektorientierung ermöglicht, jedoch verursacht das strikte Typsystem auch einen Mehraufwand, welcher in eine saubere Lösung investiert werden muss. Allerdings ist die Software dadurch nicht mehr so anfällig für Fehler, da die meisten spätestens beim kompillieren behoben werden müssen.
+Die Verwendung von TypeScript hat mir eine bessere Objektorientierung ermöglicht, jedoch verursacht das strikte Typsystem auch einen Mehraufwand, welcher in eine saubere Lösung investiert werden muss. Allerdings ist die Software dadurch nicht mehr so anfällig für Fehler, da die meisten spätestens beim Kompilieren behoben werden müssen.
 
 Generell musste ich die Software mehrfach refactoren, da sich neue Zusammenhänge ergeben haben und auch der Wechsel vom Konsolenprogramm zur Webapplikation größere architektonische Veränderungen mit sich gebracht haben.
 
-Die Konzipierung und Programmierung übersichtlicher und verständlicher Lösungshilfen, war mir sehr wichtig, da die Studierenden vorallem durch diese vorrangebracht werden. Deshalb habe ich probiert die Lösungshilfen so verständlich und übersichtlich wie möglich zu gestalten.
+Die Konzipierung und Programmierung übersichtlicher und verständlicher Lösungshilfen, war mir sehr wichtig, da die Studierenden vor allem durch diese vorangebracht werden. Deshalb habe ich probiert, die Lösungshilfen so verständlich und übersichtlich wie möglich zu gestalten.
 
 ===== Schlussfolgerungen für den Quellcode
 . Generische Konstruktoren
@@ -83,7 +84,7 @@ Die Konzipierung und Programmierung übersichtlicher und verständlicher Lösung
 [#architecture]
 ==== Architektur
 Im Idealfall sollte die Webapplikation aus einem Server bestehen, auf welchem die Aufgaben generiert werden und welcher die Rechenlast für die Verschlüsselungsaufgaben trägt und einem Client. Der Client würde dann nur die Aufgaben darstellen und mit dem Server kommunizieren.
-Aktuell ist es so, dass die gesamte Logik im Client ausgeführt wird (FatClient) eine Aufteilung in den klassischen Server-Client ist noch nicht erfolgt. Somit ist die Geschwindikeit der Applikation wesentlich von den Ressourcen des Clients abhängig.
+Aktuell ist es so, dass die gesamte Logik im Client ausgeführt wird (FatClient) eine Aufteilung in den klassischen Server-Client ist noch nicht erfolgt. Somit ist die Geschwindigkeit der Applikation wesentlich von den Ressourcen des Clients abhängig.
 
 ===== Backend
 [#structure_backend]
@@ -92,16 +93,16 @@ image::diagram_25_02_23.svg[]
 
 ===== Frontend
 [#sequence_frontend]
-.Programmaublauf - Frontend
+.Programmablauf - Frontend
 image::activity_diagram_frontend.svg[]
 
 === Probleme
-* Geschwindikeit der Applikation ist von der Rechenleistung des Clients abhängig siehe
+* Geschwindigkeit der Applikation ist von der Rechenleistung des Clients abhängig, siehe
 link:#architecture[Architektur]
 * Ver-/Entschlüsselung lief mit dem Datentyp `number` nicht immer zuverlässig, da hier unter Umständen die Zahlen abgeschnitten wurden => Einführung `BigInt`
 * Größe des BigInt in TypeScript
 +
-Die Verschlüsselung von Text war ursprünglich mittels Bytestream geplant. Dadurch entstehen allerdings sehr schnell sehr große Zahlen und Schlüssel, welche so in der gewählten Programmiersprache (TypeScript) nicht darstellbar waren und mit welchen nicht gerechnet werden konnte.
+Die Verschlüsselung von Text war ursprünglich mittels Byte-Stream geplant. Dadurch entstehen allerdings sehr schnell sehr große Zahlen und Schlüssel, welche so in der gewählten Programmiersprache (TypeScript) nicht darstellbar waren und mit welchen nicht gerechnet werden konnte.
 +
 .Probleme mit der Größe des BigInt
 |===
@@ -113,16 +114,16 @@ Von nun an erfolgt die Verschlüsselung von Text Buchstabe-für-Buchstabe. Vorte
 +
 .Verarbeitung des Textes Schritt für Schritt
 image::encode_decode_step_by_step.png[]
-* Nicht darstellbare ASCII-Zeichen z.Bsp. Backslash, LineFeed
+* Nicht darstellbare ASCII-Zeichen, z.Bsp. Backslash, Linefeed
 +
-Einige Ascii-Zeichen lassen sich nicht wirklich darstellen, diese haben in meinem Programm eine eigene Darstellung bekommmen = [*]. Für die Verwertung dieser Strukuren mussten komplexere Funktionen geschrieben werden, welche die Zeichenketten aus dem gesamt String extrahieren und umwandeln konnten.
+Einige ASCII-Zeichen lassen sich nicht wirklich darstellen, diese haben in meinem Programm eine eigene Darstellung bekommen = [*]. Für die Verwertung dieser Strukturen mussten komplexere Funktionen geschrieben werden, welche die Zeichenketten aus dem gesamt String extrahieren und umwandeln konnten.
 +
-.Asciitabelle
+.ASCII-Tabelle
 image::asciitable.png[]
 * Wertebereich für das Ver-/Entschlüsseln von Text
 +
-Es sollen ausschließlich Ascii-Zeichen und keine Unicode Zeichen angezeigt werden. Unicode-Zeichen sind vorallem für deutschsprachige Studierende schwer zu deuten (asiatische Schriftzeichen).
-Deshalb werden immer die selben Schlüssel für das Ver-/Entschlüsseln von Text verwendet. 
+Es sollen ausschließlich ASCII-Zeichen und keine Unicode Zeichen angezeigt werden. Unicode-Zeichen sind vor allem für deutschsprachige Studierende schwer zu deuten (asiatische Schriftzeichen).
+Deshalb werden immer dieselben Schlüssel für das Ver-/Entschlüsseln von Text verwendet. 
 +
 ====
 const rsaString = new Rsa({p: 3, q: 43, e: 5});
@@ -134,7 +135,7 @@ const rsaString = new Rsa({p: 3, q: 43, e: 5});
 Zusammen mit der Textkomprimierung und dem RSA Verschlüsselungsverfahren könnte sich eine Komplexaufgabe gestalten lassen.
 . Interaktive Lösungshilfen
 +
-Studierende könnten direkt in den Lösungshilfen z.Bsp. Tabellen ausfüllen und diese auch als Lösung einreichen.
+Studierende könnten direkt in den Lösungshilfen, z.Bsp. Tabellen ausfüllen und diese auch als Lösung einreichen.
 . BackEnd mit REST-Schnittstellen
 +
 Klare Trennung und bessere Ressourcennutzung.
@@ -143,4 +144,4 @@ Klare Trennung und bessere Ressourcennutzung.
 Denkbar ist eine abschließende Auswertung und Bewertung, wie gut die Aufgaben absolviert wurden und wie viele Fehler gemacht wurden.
 . Zwischenschritte der Studierenden mitspeichern
 +
-Dadurch wird es möglich, die gleiche Aufgabe nochmal mit Kommilitonen und Lehrernden durchzugehen, falls Verständnisfragen aufkommen.
+Dadurch wird es möglich, die gleiche Aufgabe nochmal mit Kommilitonen und Lehrenden durchzugehen, falls Verständnisfragen aufkommen.
