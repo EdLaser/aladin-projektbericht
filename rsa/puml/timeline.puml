@@ -4,7 +4,7 @@
 :Erste Klasse zum Verschlüsseln;
 :Programmierung der Hilfsfunktionen;
 :Konsolenprogramm;
-:Entkopplung der Konponenten;
+:Entkopplung der Komponenten;
 :Konfigurationsklassen;
 :Einführung BigInt;
 :Konfigurationshandler (Instanziiert die Klassen) \n Generischer Konstruktor;
