@@ -5,7 +5,12 @@
 === Aufgabenbeschreibung
 ==== Gegebenheiten / Design der Aufgabe
 Meine Augfabe im Projektseminar war es, Aufgaben zum Steuerrecht umzusetzen. Dabei ging es darum, Aufgaben zu generieren bei denen die Studierenden das zu versteuernde Einkommen berechnet. Die Aufgaben sollen mit zufälligen Werten und Kombinationen aus einem Pool und Sachverhaltstypen generiert werden. Um die Lösung des Studenten zu prüfen, muss neben der Aufgabe auch noch die dazugehörige Lösung erstellt werden.
-Basis dieser Aufgaben bildet ein Text, mit unterschiedlichen steuerlichen Sachverhalten, welche die Studierenden herauslesen müssen. Die Sachverhalte sind dabei miteiander verwoben, können aber müssen nicht aufeinander aufbauen. Dies soll dazu führen, dass die Studierenden zum aktiven Kombinieren angeregt werden. Die Anzahl an unterschieldichen Sachverhaltstypen, soll stetig erweiterbar bleiben, im Moment werden Gehalt, Kapitalvermögen, Vermietung und für alle Typen Werbungskosten unterstützt.
+Basis dieser Aufgaben bildet ein Text, mit unterschiedlichen steuerlichen Sachverhalten, welche die Studierenden herauslesen müssen. Die Sachverhalte sind dabei miteiander verwoben, können aber müssen nicht aufeinander aufbauen. 
+
+.Beispielaufgabe mit einegfärbten Sachverhalten
+image:beispielaufgabe-gefärbt.png[]
+
+Dies soll dazu führen, dass die Studierenden zum aktiven Kombinieren angeregt werden. Die Anzahl an unterschieldichen Sachverhaltstypen, soll stetig erweiterbar bleiben, im Moment werden Gehalt, Kapitalvermögen, Vermietung und für alle Typen Werbungskosten unterstützt.
 Um eine natürliche Satzstruktur zu wahren, muss der Text dabei unterschiedliche Satzkonstruktionen enhalten. Dazu sollen mehrere 'Versionen' des Satzes genutzt werden, welche dann zufällig ausgewählt werden. 
 Die Wertebereiche der Aufgaben müssen sich in einem realistischen Bereich bewegen, um nahezu an die Realtität zu kommen, sodass sich der Text umso mehr 'real' anfühlt.
 
@@ -621,8 +626,28 @@ ____
 ____
 
 ====== ErrorComponent
-Beim ErrorComponent wird lediglich ein Error im unteren Bereich der Seite angegeben. Dies wird realisiert, indem die Komponente auf den im Store gespeicherten Error bei Änderung zugreift und diese einfach in einer Row ausgibt. Als Attribute besitzt die Komponente hier nur den Store.
+Beim ErrorComponent wird lediglich ein Error im unteren Bereich der Seite angegeben. Dies wird realisiert, indem die Komponente auf den im Store gespeicherten Error bei Änderung zugreift und diese einfach in einer Row ausgibt. Als Attribute besitzt die Komponente hier nur den Store, um nach Änderung des Errors im Store den Error auszugeben.
 
 === Ergebnisse
+Um das Erreichte noch einmal zusammenfassend darzustellen, erleutere ich, welche Use-Cases von der Software abgedeckt werden und wie der finale Stand der UI ist. 
+
+==== Use-Cases
+Folgende Use-Cases können mit der Software bedient werden:
+
+image:use-cases.png[]
+
+. UI aufrufen: Der Student kann die UI aufrufen und die Oberflächenelemente betrachten
+. Parameter der Aufgabe anpassen: Der Student kann, durch die UI Elemente, die Parameter für die gewünschte Aufgabe anpassen
+. Aufgabe generieren: Der Student kann sich nach seinen Wünschen eine Aufgabe generieren lassen
+. Aufgabe anzeigen: Der Student kann sich die, nach seinen Wünschen generierte, Aufgabe anzeigen lassen
+. Aufgabe bearbeiten: Der Student kann die Aufgabe mit den Lösungsreihen abarbeiten
+. Aufgabe lösen: Der Student kann seine Lösung prüfen lassen und eventuell korregieren
+. Komplettlösung anzeigen: Der Student kann sich die vollständige Lösung zur Aufgabe anzeigen lassen
+. Prüfen welche Aufgaben gelöst wurden: Der Student sieht in der UI welche Aufgaben er bereits gelöst hat, diese können noch *nicht* erneut aufgerufen werden
+
+Die grundlegenden Funktionalitäten zur Bearbeitung der Aufgaben sind dadurch abgedeckt und auf ihnen kann aufgebaut werden. Der Student ist also in der Lage, Aufgaben nach seinen Wünschen zu erstellen und zu lösen, sowie seine eigene Lösung zu prüfen. 
+
+==== Stand der UI
+
 
 === Ausblick
