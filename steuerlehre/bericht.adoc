@@ -415,11 +415,10 @@ Wird die Komponente gemounted, wird der Endpunkt angesprochen, welcher alle verf
 [source, Javascript]
 ____
     getCasesToChoose: function () {
-            const url = "http://localhost:8000/cases-to-choose";
-            axios.get(url).then((res) => {
-                this.allCases = res.data;
-            });
-
+        const url = "http://localhost:8000/cases-to-choose";
+        axios.get(url).then((res) => {
+            this.allCases = res.data;
+        });
     }
 ____
 
@@ -588,7 +587,6 @@ ____
             }).catch((error) => {
                 store.error = error
             });
-
             axios.get(url + "zve/" + store.task_id).then((res) => {
                 this.zve = res.data;
             }).catch((error) => {
@@ -648,6 +646,38 @@ image:use-cases.png[]
 Die grundlegenden Funktionalitäten zur Bearbeitung der Aufgaben sind dadurch abgedeckt und auf ihnen kann aufgebaut werden. Der Student ist also in der Lage, Aufgaben nach seinen Wünschen zu erstellen und zu lösen, sowie seine eigene Lösung zu prüfen. 
 
 ==== Stand der UI
+Das User Interface beinhaltet am Ende des Projektes alle vorherigen Komponenten. Beim Farbschema habe ich mich an das dunkle Theme von Bootstrap gehalten und auch die Buttons eher subtil eingefärbt. Die einzelnen Komponenten lassen sich, mit dem oben dargestellten Konzept, leicht in der UI erkennen. 
 
+.finaler Stand der UI
+image:ui-final.png[]
 
 === Ausblick
+Durch den zeitlich begrenzten Rahmen des Projektes, gibt es prospektiv noch Verbesserungsmöglichkeiten für die ALADIN Lösung im Steuerrecht. Der jetzige Stand der Software bietet eine gute Grundlage auf der nachfolgend aufgebaut werden kann. Ausgewählte Möglichkeiten möchte ich nachfolgend darstellen.
+
+==== Hinweise zu den Aufgaben
+Es gibt bereits in den Datenstrukturen der Lösungsklasse (Solution.py) ein Attribut, in welchem Hinweise hinzugefügt werden können. Um dem Studenten, auf Wunsch, die Aufgabe zu erleichtern, ist es sinnvoll, einen Button um Hinweise einzublenden hinzuzufügen. Auch ein Einblenden nach beispielweise 3-4 nicht erfolgreichen Lösungsversuchen wäre sinnvoll.
+
+==== Optimieren des Sprachmodels
+Wie zu Anfang beschrieben, wird, um die Sätze grammatikalisch unterschiedlich zu gestalten, ein Sprachmodel von Huggingface verwendet. Dieses Sprachmodel wurde jedoch nicht auf steuerliche Sachverhalte trainiert. Diese erfordern nicht zwangsweise spezielle grammatikalische Konstruktion, jedoch sind die Trennwörter des Sprachmodels nicht immer korrekt. 
+
+.durch Sprachmodel gefüllte Masken
+image:masken-gefüllt.png[]
+
+Je nach Aufwand, kann sich ein eigenes trainiertes Model lohnen, um die Qualität der Sätze zu erhöhen.
+
+==== Neue Sachverhalte
+Zusätzlich lassen sich auch neue Sachverhalte hinzufügen und definieren. Das Steuerrecht bietet hier eine enorm große Anzahl an Möglichkeiten, auch beispielweise stark zusammenhängende Sachverhalte, welche aufeinander aufbauen. Auch spezielle Sachverhalte wie das Teileinkünfteverfahren oder Ehegattensplitting sind denkbar.
+
+==== Neue Aufgabentypen
+Um die Übungsmöglichkeiten zu steigern, können auch weitere Aufgabentypen definiert werden. Typische Aufgaben aus dem Steuerrecht umfassen ebenfalls:
+
+* Zurodnung von Einkunftsarten
+* Rechnen von Besteuerungsmöglichkeiten
+* Vor- / Nachteile von Besteuerungsmöglichkeiten
+* Spezielle Textaufgaben zu spezieller Besteuerung
+* Bilanzierung
+
+Hierbei ist es möglich, sich von den klassischen Textaufgaben loszulösen.
+
+==== Upload einer Konfiguration
+Grundlegend ist eine Komponente im Frontend enthalten, welche in Zukunft den Upload einer eigenen Konfiguration an Gesetzen sowie Sachverhalten ermöglichen kann. Dazu fehlt noch der Upload der Konfiguration auf den Server / das Backend, sowie das folgende Laden der Aufgaben in die Auswahl.
