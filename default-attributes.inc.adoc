@@ -2,6 +2,7 @@
 :project-name: Aladin Porjektbericht
 :sectnums:
 :sectnumlevels: 5
+:chapter-signifier: Abschnitt
 // Settings:
 :toc:
 :toc-title: Inhaltsverzeichnis

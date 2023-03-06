@@ -1,3 +1,9 @@
+:path: chemie/
+:imagesdir: img/
+:plantumlsdir: puml
+ifdef::rootpath[]
+:imagesdir: {rootpath}{path}{imagesdir}
+endif::rootpath[]
 = 4. Generierung von zufallsbasierten Molekülen
 
 == 4.1 Aufgabenbeschreibung

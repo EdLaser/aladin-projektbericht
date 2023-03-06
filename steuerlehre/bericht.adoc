@@ -1,5 +1,10 @@
 :source-highlighter: rouge
-:imagesdir: img
+:path: steuerlehre/
+:imagesdir: img/
+:plantumlsdir: puml
+ifdef::rootpath[]
+:imagesdir: {rootpath}{path}{imagesdir}
+endif::rootpath[]
 == Steuerrecht
 
 === Aufgabenbeschreibung

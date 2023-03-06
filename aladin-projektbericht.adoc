@@ -1,5 +1,9 @@
 :doctype: book
 include::./default-attributes.inc.adoc[]
+:path: aladin-projektbericht/
+ifndef::rootpath[]
+:rootpath: ./
+endif::rootpath[]
 
 = Projektbericht Aladin
 
@@ -8,7 +12,6 @@ include::./default-attributes.inc.adoc[]
 === Problemerläuterung 
 === Vorstellung Aladin
 === Ziel der Projekte
-
 include::./steuerlehre/bericht.adoc[]
 include::./epk/bericht.adoc[]
 // include::./sortieralgorithmen/bericht.adoc[]

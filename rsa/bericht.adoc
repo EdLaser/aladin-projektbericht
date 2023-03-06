@@ -1,6 +1,9 @@
-
-:imagesdir: img
+:path: rsa/
+:imagesdir: img/
 :plantumlsdir: puml
+ifdef::rootpath[]
+:imagesdir: {rootpath}{path}{imagesdir}
+endif::rootpath[]
 
 == RSA Verschlüsselung
 
@@ -20,7 +23,7 @@ Mithilfe dieses Aufgabentyps sollen Studierenden das RSA Verschlüsselungsverfah
 [#exercise]
 ===== Beispiel
 .Beispielaufgabe RSA
-image::example_exercise.png[pdfwidth=450px, width=450px, scaledwidth=450px]
+image::example_exercise.png[pdfwidth=350px, width=350px, scaledwidth=350px]
 
 [#requirements]
 ==== Anforderungen
@@ -37,7 +40,7 @@ image::example_exercise.png[pdfwidth=450px, width=450px, scaledwidth=450px]
 ==== Projektverlauf
 
 .Zeitlicher Ablauf - Überblick
-image::timeline.png[width=40%, pdfwidth=40%,scaledwidth=40%]
+image::timeline.png[width=35%, pdfwidth=35%,scaledwidth=35%]
 
 ==== Konsolenprogramm
 Mithilfe eines einfachen Konsolenprogramms sollten die Basisfunktionen getestet werden können. Die Vorteile hierbei sind zum einen, die schnellere Entwicklung, da der Fokus eher auf die Funktionen als die Darstellung gelegt wird. Außerdem wird die technische Komplexität gering gehalten, weil nur wenige externe Bibliotheken verwendet werden müssen. Im folgenden Screenshot ist die Konfiguration einer Aufgabe zu sehen, anschließend generiert das Programm die erforderlichen Werte für die Aufgabe.
@@ -49,7 +52,7 @@ image::ConsoleProgramm.png[]
 Eine Webapplikation bietet mehrere Vorteile, zum einen lässt sie sich relativ schnell in andere Applikationen integrieren, auf der anderen Seite lässt sie sich mit fast allen Geräten anzeigen und bedienen. Im Vergleich zur Konsolenanwendung bietet die Webapplikation eine intuitive Bedienung und wirkt für den Benutzenden ansprechender. Hierbei liegt der Fokus weniger auf der Funktionalität, wie der Generierung der Aufgabe. Es geht eher darum, wie die Inhalte aufgeteilt werden können um ein gutes Benutzererlebnis zu gewährleisten. Die Oberfläche sollte einfach zu bedienen sein und die Studierenden sollen nicht von den Inhalten überfordert werden.
 
 .Webapplikation mit Lösungshilfen
-image::webapplication_solutionaids.png[width=80%, pdfwidth=80%,scaledwidth=80%]
+image::webapplication_solutionaids.png[width=65%, pdfwidth=65%,scaledwidth=65%]
 
 ==== Input-Validierung
 Nutzereingaben müssen validiert werden, bevor diese durch das Programm verarbeitet werden. Dafür wurden zwei Ansätze getestet.
@@ -110,14 +113,14 @@ Die Verschlüsselung von Text war ursprünglich mittels Byte-Stream geplant. Dad
 +
 .Probleme mit der Größe des BigInt
 |===
-|image:problem_bytestream.png[]|image:bitint_exceeded.png[]
+|image:problem_bytestream.png[]|image:bigint_exceeded.png[]
 
 |===
 +
 Von nun an erfolgt die Verschlüsselung von Text Buchstabe-für-Buchstabe. Vorteil dieser Variante, ist es, dass es für die Studierenden leicht zu verstehen und einfacher in der Anwendung ist.
 +
 .Verarbeitung des Textes Schritt für Schritt
-image::encode_decode_step_by_step.png[]
+image::encode_decode_step_by_step.png[pdfwidth=300px, width=300px, scaledwidth=300px]
 * Nicht darstellbare ASCII-Zeichen, z.Bsp. Backslash, Linefeed
 +
 Einige ASCII-Zeichen lassen sich nicht wirklich darstellen, diese haben in meinem Programm eine eigene Darstellung bekommen = [*]. Für die Verwertung dieser Strukturen mussten komplexere Funktionen geschrieben werden, welche die Zeichenketten aus dem gesamt String extrahieren und umwandeln konnten.
@@ -131,6 +134,9 @@ Es sollen ausschließlich ASCII-Zeichen und keine Unicode Zeichen angezeigt werd
 ====
 const rsaString = new Rsa({p: 3, q: 43, e: 5});
 ====
+
+=== Ergebnisse
+Zusammenfassend kann man sagen, dass sich mit dem Programm zufriedenstellend Aufgaben und entsprechende Lösungshilfen generieren lassen. Die Aufgabenstellungen können individuell an den jeweiligen Lernfortschritt angepasst werden und unterstützen damit die Studierenden beim Lernen. 
 
 === Ausblick
 . Erweiterung um Textkomprimierung z.Bsp. Huffman-Code

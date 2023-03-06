@@ -1,4 +1,9 @@
-:imagesdir: img
+:path: epk/
+:imagesdir: img/
+:plantumlsdir: puml
+ifdef::rootpath[]
+:imagesdir: {rootpath}{path}{imagesdir}
+endif::rootpath[]
 
 
 == Generierung Ereignisgesteuerte Prozessketten
