@@ -10,7 +10,11 @@ endif::rootpath[]
 // ToDo: mit Inhalt füllen
 == Einleitung
 === Problemerläuterung 
+
+include::./Abschnitt1/Problemerlaeuterung.adoc[]
+
 === Vorstellung Aladin
+include::./Abschnitt1/Vorstellung_Aladin.adoc[]
 === Ziel der Projekte
 include::./steuerlehre/bericht.adoc[]
 include::./epk/bericht.adoc[]
