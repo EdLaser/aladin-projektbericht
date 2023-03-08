@@ -23,5 +23,32 @@ include::./epk/bericht.adoc[]
 include::./chemie/bericht.adoc[]
 include::./rsa/bericht.adoc[]
 
+== Reflexion
+
 == Schluss
-== Gesamt Fazit
+Mit dem erfolgreichen Abschluss des Projektes, bleibt immer noch viel Raum für Verbesserungen oder auch neue Projekte innerhalb des ALADIN-Frameworks. Durch unsere Arbeit, um neue Sachgebieten der Informatik in ALADIN einzubringen, haben wir gute Grundsteine für eine Weiterentwicklung gelegt. Mit dem intensiven Auseinandersetzen bieten sich uns aber auch neue Ideen, welche in ALADIN integriert werden können.
+
+=== Folgeprojekte
+==== No-Code 
+Durch die Aktualität von No-Code Plattform und deren Vorteile für schnellen Einsatz von Software, ist auch eine No-Code Lösung für ALADIN denkbar. Hierbei wäre es möglich, ein Tool zu bauen um einheitliche Aufgaben für beliebige Disziplinen anzubieten. Dabei können sich Nutzer eigene Themengebiete erstellen und die Aufgaben einfach über die No-Code Plattform mit einem Editor zusammenbauen. Mit dieser Lösung ließe sich eine einheitliche Aufgabengenerierung schaffen, welche aber in ihrer Anpassbarkeit stärker eingeschränkt ist.
+
+==== Erweiterung der Fachbereiche
+Die Informatik bietet ein großes Spektrum an Fachbereichen, welche noch nicht in ALADIN angeboten werden. Eine Erweiterung ist hier also immer möglich und sinnvoll. Vorstellbar sind weiterhin Disziplinen aus dem Studienablauf der Informatik:
+
+* Vertragsrecht
+* Geschäftsprozessmodellierung
+* Zahlensystemumrechnung
+* Dijkstra Algorithmus
+* Aussagenlogik
+* Statistik
+* Graphentheorie
+* Zeichenkodierung / Zeichnedarstellung
+
+==== Integration von Feedback-Mechanismen
+In ALADIN wäre es ebenfalls von Nutzen, Feedback-Mechanismen für die Aufgaben einzubauen. Mit diesem Feedback können die Aufgabenerstellung sowie die Lösungen besser evaluiert werden, um die Qualität von ALADIN dauerhaft zu steigern. Außerdem lässt sich aus dem Feddback erkennen wie die Benutzer mit den generierten Aufgaben und Lösungshilfen interagierten.  
+
+==== Lernpfade
+Um in einem Fachgebiet fundierte Kenntnisse zu erwerben, gibt es, änhlich wie in einer Vorlesung, eine Reihenfolge in der man sich wissen aneignen sollte. Diese Reihenfolge kann in Form eines Lernpfades umgesetzt werden, welcher eine Folge von Aufgaben und Lösungshilfen darstellt. Dabei wird dem Nutzer eine Reihenfolge vorgegeben und die Frustration, durch einen fehlenden Roten Faden, genommen.
+
+==== Integration von KI-Elementen
+Durch dne gezielten Einsatz von KI, kann auch das ALADIN-Framework profitieren. In ALADIN könnte ein KI-Einsatz zum Beispiel bedeuten, dass die gelösten Aufgaben von der KI ausgewertet werden, oder neue Aufgaben durch die KI generiert werden. Außerdem kann das Feedback der Nutzer, wenn bereits integriert, ausgewertet werden um die Qualität der Aufgaben zu erhöhen, aber auch die Lösungshilfen könnten dynamisch mit KI-Einsatz generiert werden.
