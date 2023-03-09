@@ -51,6 +51,17 @@ include::./chemie/bericht.adoc[]
 include::./rsa/bericht.adoc[]
 
 == Reflexion
+Mit der Reflexion, als wichtigen Teil einer Projektarbeit, möchten wir beleuchten, wie die Projektarbeit für jeden Teilnehmer war. Dabei stellt jeder Bearbeiter seine Entwicklung und seine Learnings aus dem gesamten Projekt da, um ein gezieltes Feedback für die Arbeit zu erbringen
+
+=== Timm Hauschild
+In dem Projekt Aladin konnte ich wertvolle Erfahrungen sammeln, die mich in meiner persönlichen und beruflichen Weiterentwicklung unterstützt haben. Insbesondere habe ich gelernt, wie man komplexe Algorithmen mit Java erstellt und wie man dabei Klassendiagramme und Programmablaufpläne verwendet. Diese Fähigkeiten werden in der Softwareentwicklung sehr geschätzt und sind ein wichtiger Bestandteil der Programmierung.
+
+Darüber hinaus habe ich meine Fähigkeiten in der Arbeit mit Java-Listen weiter ausgebaut und konnte meine Kenntnisse in der Vererbung von Klassen vertiefen. Dies ist eine wichtige Fähigkeit, die in vielen Projekten benötigt wird und mir in Zukunft sicherlich von großem Nutzen sein wird.
+
+Ein weiterer wichtiger Bestandteil des Projekts war die Arbeit mit ChatGPT, einem Sprachmodell, das in der Lage ist, menschenähnliche Texte zu generieren. Ich war sehr beeindruckt von den Möglichkeiten, die ChatGPT bietet, und sehe großes Potenzial für die Verwendung dieses Modells in verschiedenen Anwendungsbereichen.
+
+Ein weiteres wichtiges Learning war die Bedeutung der Zusammenarbeit mit Kunden und der Berücksichtigung ihrer technischen Expertise. Ich habe gelernt, wie wichtig es ist, den Kunden frühzeitig in den Entwicklungsprozess einzubeziehen und auf seine Bedürfnisse und Anforderungen einzugehen. Durch die Zusammenarbeit mit dem Kunden konnte ich wertvolle Einblicke gewinnen und meine Fähigkeiten in der Softwareentwicklung weiter verbessern.
+
 
 == Schluss
 Mit dem erfolgreichen Abschluss des Projektes, bleibt immer noch viel Raum für Verbesserungen oder auch neue Projekte innerhalb des ALADIN-Frameworks. Durch unsere Arbeit, um neue Sachgebieten der Informatik in ALADIN einzubringen, haben wir gute Grundsteine für eine Weiterentwicklung gelegt. Mit dem intensiven Auseinandersetzen bieten sich uns aber auch neue Ideen, welche in ALADIN integriert werden können.
