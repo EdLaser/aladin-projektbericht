@@ -62,6 +62,12 @@ Ein weiterer wichtiger Bestandteil des Projekts war die Arbeit mit ChatGPT, eine
 
 Ein weiteres wichtiges Learning war die Bedeutung der Zusammenarbeit mit Kunden und der Berücksichtigung ihrer technischen Expertise. Ich habe gelernt, wie wichtig es ist, den Kunden frühzeitig in den Entwicklungsprozess einzubeziehen und auf seine Bedürfnisse und Anforderungen einzugehen. Durch die Zusammenarbeit mit dem Kunden konnte ich wertvolle Einblicke gewinnen und meine Fähigkeiten in der Softwareentwicklung weiter verbessern.
 
+=== Ruben-David Kraus
+Retrospektiv betrachtet, empfinde ich die Arbeit am Projekt ALADIN als wertvolle Erfahrung im Studium. Durch das eigenverantwortliche Arbeiten und die freie Auswahl der Themengebiete, hatte ich das Gefühl stets die Aufgabe zu bearbeiten, die mich persönlich begeistert. Durch die wöchentlichen Meetings, fand auch ein reger Austausch zwischen den einzelnen Bearbeitenden statt und es konnten wertvolle Ideen untereinander ausgetauscht werden. Außerdem war dadurch kontinuierliches Feedback durch die Lehrenden möglich, was stets zum erfolgreichen Bearbeiten der Aufgabe beigetragen hat.
+
+Im Hinblick auf mein technisches Know-How konnte ich mich in Richtung aktueller Webentwicklung und Backend weiterentwickeln. Ich habe erfolgreich Vuejs, ein Javascript Framework, angwendet und meine Kentnisse im Framework, sowie in Javascript entscheidend erwweitert. Im Backend konnte ich meine Python Kentnisse weiter ausbauen und FastAPI als neues Framework erlernen. Architektonisch war es herasufordernd, aber auch spannend, eine eigene API zu entwickeln und diese erfolgreich an das Frontend anzubinden. Dabei habe ich viel über Kommunikation über REST-SChnittstellen gelernt und mein bereits vorhandenes Wissen angewendet. 
+
+Das natural language processing, als neues Fachgebiet der Informatik, hat mich in diesem Projekt am meisten gereizt. In diesem Gebiet erste Erfahrungen zu sammeln, hat mir persönlich viel Erkentnisse gebracht. Der damit verbundene Einsatz von KI Technologien, auch mit ChatGPT, war überaus spannend. Weiterhin möchte ich mein Wissen in diese Richtung ausbauen.
 
 == Schluss
 Mit dem erfolgreichen Abschluss des Projektes, bleibt immer noch viel Raum für Verbesserungen oder auch neue Projekte innerhalb des ALADIN-Frameworks. Durch unsere Arbeit, um neue Sachgebieten der Informatik in ALADIN einzubringen, haben wir gute Grundsteine für eine Weiterentwicklung gelegt. Mit dem intensiven Auseinandersetzen bieten sich uns aber auch neue Ideen, welche in ALADIN integriert werden können.
