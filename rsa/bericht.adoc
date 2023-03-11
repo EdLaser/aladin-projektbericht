@@ -13,7 +13,7 @@ endif::rootpath[]
 Mithilfe dieses Aufgabentyps sollen Studierenden das RSA Verschlüsselungsverfahren verstehen und anwenden lernen. Durch unterschiedliche Schwierigkeitsgrade, bei denen die Studierenden stärker an die Hand genommen werden oder mehr Freiheit gegeben wird, können diese ihre Aufgaben auf jeden jeweiligen Lernstand anpassen. Zusätzlich sollen geeignete Lösungshilfen vorhanden sein, mit denen die Studierenden in der Lage sind, Schritt für Schritt die Lösungen der Aufgaben erarbeiten. Wichtig ist dabei, dass die Studierenden nicht vom Umfang der Aufgaben erschlagen werden, sondern diese in kleinteiligen Aufgabenpaketen erledigen können.
 
 [#task_types]
-==== Aufgabentypen
+==== Aufgabenteile
 . Erzeugen von teilerfremden Zahlen
 . Bestimmen von Primzahlen
 . Generierung des öffentlichen und des privaten Schlüssels
@@ -137,6 +137,16 @@ const rsaString = new Rsa({p: 3, q: 43, e: 5});
 
 === Ergebnisse
 Zusammenfassend kann man sagen, dass sich mit dem Programm zufriedenstellend Aufgaben und entsprechende Lösungshilfen generieren lassen. Die Aufgabenstellungen können individuell an den jeweiligen Lernfortschritt angepasst werden und unterstützen damit die Studierenden beim Lernen. 
+
+Schlussendlich habe ich die aktuelle Version des Projektes link:https://a-schulz.github.io/ALADIN_Cryptography/[hier] veröffentlicht.
+
+.Finale Version
+image::software_deployed.png[pdfwidth=450px, width=450px, scaledwidth=450px]
+Die ausführliche Softwaredokumentation findet man link:https://a-schulz.github.io/ALADIN_Cryptography/docs/[hier].
+Interessant ist beispielsweise der Aufbau der link:https://a-schulz.github.io/ALADIN_Cryptography/docs/classes/backend_rsaCryptography_Rsa.Rsa.html[RSA Klasse] und dessen zugehörige Funktionen.
+
+.Documentation RSA-Klasse
+image::docs_rsa_class.png[]
 
 === Ausblick
 . Erweiterung um Textkomprimierung z.Bsp. Huffman-Code

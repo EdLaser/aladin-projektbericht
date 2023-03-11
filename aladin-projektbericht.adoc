@@ -69,6 +69,14 @@ Im Hinblick auf mein technisches Know-How konnte ich mich in Richtung aktueller 
 
 Das natural language processing, als neues Fachgebiet der Informatik, hat mich in diesem Projekt am meisten gereizt. In diesem Gebiet erste Erfahrungen zu sammeln, hat mir persönlich viel Erkentnisse gebracht. Der damit verbundene Einsatz von KI Technologien, auch mit ChatGPT, war überaus spannend. Weiterhin möchte ich mein Wissen in diese Richtung ausbauen.
 
+=== Alexander Schulz
+Rückblickend habe ich im ALADIN Projekt sehr viel lernen können. Zu einen konnte ich mein Verständnis für objektorientierte Programmierung sehr stark verbessern. Bisher hatten wir im Studium noch keine komplexeren Einzelprojekte in dieser Größenordnung. Ich habe gelernt guten Code mit wenigen Abhängigkeiten zu schreiben und habe diesen permanent für Nachfolger dokumentiert. Außerdem habe ich mit vielen neuen Bibliotheken gearbeitet und so gesehen, wie Technologien integriert werden können und sich Schritt für Schritt über mehrere Stufen eine Software entwickeln kann.
+
+Doch auch fachlich hat sich das Projektseminar ausgezahlt, so konnte ich tief in aktuelle Verschlüsselungsverfahren eintauchen und auch die Unterschiede zwischen diesen erkennen, während ich das RSA-Verfahren implementierte. Viel Aufwand habe ich in die Entwicklung der Benutzeroberfläche gesteckt und teilweise war es nicht so einfach zu entscheiden, wie bestimmte Sachverhalte erklärt und dargestellt werden sollten, damit der Endnutzer das Programm intuitiv bedienen kann und die Aufgaben und Lösungshilfen versteht.
+
+Besonders gut hat mir die wöchentliche Vorstellungs- und Austauschrunde gefallen. Hier konnte man seine Probleme präsentieren und von den Erfahrungen der anderen Teilnehmer profitieren, was mir persönlich sehr bei der Entwicklung geholfen hat. Außerdem war es immer sehr interessant zu sehen, wie die anderen ihre Aufgaben bewerkstelligten und welche Technologien dabei zum Einsatz kamen. Bemerkenswert fand ich die Verwendung des Sprachmodells bei Ruben, mit welchem er seien Aufgabenstellung generieren lässt. Dabei wurde mir klar, wie vielseitig die KI jetzt schon eingesetzt werden kann und wie man selbst diese in eigene Projekte integrieren könnte. Spannend fand ich auch die Entwicklung des Algorithmus für die EPK-Generierung und wie damit nun Geschäftsprozesse generiert werden können.
+
+
 == Schluss
 Mit dem erfolgreichen Abschluss des Projektes, bleibt immer noch viel Raum für Verbesserungen oder auch neue Projekte innerhalb des ALADIN-Frameworks. Durch unsere Arbeit, um neue Sachgebieten der Informatik in ALADIN einzubringen, haben wir gute Grundsteine für eine Weiterentwicklung gelegt. Mit dem intensiven Auseinandersetzen bieten sich uns aber auch neue Ideen, welche in ALADIN integriert werden können.
 
