@@ -9,7 +9,7 @@
 :toclevels: 2
 // :sectnums:
 :icons: font
-//:source-highlighter: highlightjs
+//:source-highlighter: highlights
 :source-highlighter: rouge
 :rouge-style: github
 :xrefstyle: full

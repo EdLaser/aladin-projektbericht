@@ -46,12 +46,12 @@ Automatische zufallsbasierte Generierung unendlich vieler Aufgaben, Lösungshilf
 
 include::./steuerlehre/bericht.adoc[]
 include::./epk/bericht.adoc[]
-// include::./sortieralgorithmen/bericht.adoc[]
+include::./sortieralgorithmen/bericht.adoc[]
 include::./chemie/bericht.adoc[]
 include::./rsa/bericht.adoc[]
 
 == Reflexion
-Mit der Reflexion, als wichtigen Teil einer Projektarbeit, möchten wir beleuchten, wie die Projektarbeit für jeden Teilnehmer war. Dabei stellt jeder Bearbeiter seine Entwicklung und seine Learnings aus dem gesamten Projekt da, um ein gezieltes Feedback für die Arbeit zu erbringen
+Mit der Reflexion, als wichtigen Teil einer Projektarbeit, möchten wir beleuchten, wie die Projektarbeit für jeden Teilnehmer war. Dabei stellt jeder Bearbeiter seine Entwicklung und seine Learnings aus dem gesamten Projekt da, um ein gezieltes Feedback für die Arbeit zu erbringen.
 
 === Timm Hauschild
 In dem Projekt Aladin konnte ich wertvolle Erfahrungen sammeln, die mich in meiner persönlichen und beruflichen Weiterentwicklung unterstützt haben. Insbesondere habe ich gelernt, wie man komplexe Algorithmen mit Java erstellt und wie man dabei Klassendiagramme und Programmablaufpläne verwendet. Diese Fähigkeiten werden in der Softwareentwicklung sehr geschätzt und sind ein wichtiger Bestandteil der Programmierung.
@@ -75,6 +75,15 @@ Rückblickend habe ich im ALADIN Projekt sehr viel lernen können. Zu einen konn
 Doch auch fachlich hat sich das Projektseminar ausgezahlt, so konnte ich tief in aktuelle Verschlüsselungsverfahren eintauchen und auch die Unterschiede zwischen diesen erkennen, während ich das RSA-Verfahren implementierte. Viel Aufwand habe ich in die Entwicklung der Benutzeroberfläche gesteckt und teilweise war es nicht so einfach zu entscheiden, wie bestimmte Sachverhalte erklärt und dargestellt werden sollten, damit der Endnutzer das Programm intuitiv bedienen kann und die Aufgaben und Lösungshilfen versteht.
 
 Besonders gut hat mir die wöchentliche Vorstellungs- und Austauschrunde gefallen. Hier konnte man seine Probleme präsentieren und von den Erfahrungen der anderen Teilnehmer profitieren, was mir persönlich sehr bei der Entwicklung geholfen hat. Außerdem war es immer sehr interessant zu sehen, wie die anderen ihre Aufgaben bewerkstelligten und welche Technologien dabei zum Einsatz kamen. Bemerkenswert fand ich die Verwendung des Sprachmodells bei Ruben, mit welchem er seien Aufgabenstellung generieren lässt. Dabei wurde mir klar, wie vielseitig die KI jetzt schon eingesetzt werden kann und wie man selbst diese in eigene Projekte integrieren könnte. Spannend fand ich auch die Entwicklung des Algorithmus für die EPK-Generierung und wie damit nun Geschäftsprozesse generiert werden können.
+
+=== Dustin Doege
+Zusammenfassend kann ich sagen, dass ich mit dem erreichten Stand der Software zufrieden bin, obwohl nicht alle Anforderungen zu 100% erfüllt wurden. Während des Projekts habe ich viel Zeit investiert, viele neue Methoden und Patterns kennengelernt und mein Wissen im Bereich der Softwareentwicklung erweitert.
+
+Insbesondere in der Java-Programmierung habe ich große Fortschritte gemacht, auch wenn ich im Rückblick einige Funktionen oder Klassen anders umsetzen würde. Ich bin auch mit dem Vaadin-Framework vertraut geworden, welches mir zu Beginn des Projekts noch fremd war, und werde dessen Verwendung in meiner zukünftigen beruflichen Laufbahn berücksichtigen.
+
+Ich habe die wöchentlichen Meetings genossen, da sie mir geholfen haben, meine Anwendung weiterzuentwickeln und man stetig neue Dinge gelernt hat. Es war interessant zu sehen, was meine Kommilitonen im Verlauf des Projekts erreicht haben. Allerdings hätte ich mir gewünscht, dass die Teamarbeit in diesem Projekt stärker betont worden wäre.
+
+Ich bin dankbar für die Zeit im Projekt und gehe mit vielem Erlernten und neuer Erfahrungen aus diesem Projekt.
 
 
 == Schluss
