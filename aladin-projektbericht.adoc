@@ -85,6 +85,12 @@ Ich habe die wöchentlichen Meetings genossen, da sie mir geholfen haben, meine 
 
 Ich bin dankbar für die Zeit im Projekt und gehe mit vielem Erlernten und neuer Erfahrungen aus diesem Projekt.
 
+=== Philip Poplutz
+Bei der Arbeit am ALADIN Projekt habe ich einiges an Kenntnissen dazugewonnen. Am Anfang war ich von der Aufgabe überwältigt, aber durch die wöchentlichen Meetings und die kleinen Ziele, die ich mir jede Woche gesetzt habe, gelang mir das Arbeiten immer strukturierter, schneller und einfacher. Es war mein erstes Code-Projekt in dieser Größenordnung, weswegen ich rückblickend einiges anders gemacht hätte, aber ich bin dennoch zufrieden mit dem Ergebnis. Zusätzlich war es mein erstes Projekt mit Python. Beim Lernprozess habe ich festgestellt, dass Python eine Sprache ist, die ich mir sehr gut selbst beibringen kann. Python zu lernen ist ein wichtiger Schritt für meine Zukunft gewesen und ich werde ab jetzt weiter an Python-Projekten arbeiten.
+
+Außerdem fande ich es sehr gut, dass jeder wöchentliche Updates zu seinem Projekt gegeben hat. Natürlich konnte man dabei nicht immer alles zu 100% verstehen, dennoch haben alle von ihren Fehlern und Erfolgen berichtet, was mir definitiv bei der Weiterentwicklung geholfen hat. Nebenbei habe ich durch das Projekt auch noch meine Chemiekenntnisse aufgefrischt.
+
+Insgesamt war das Projektseminar eine große Bereicherung für mich und auf viele dadurch erlernte Skills werde ich in Zukunft zurückgreifen.
 
 == Schluss
 Mit dem erfolgreichen Abschluss des Projektes, bleibt immer noch viel Raum für Verbesserungen oder auch neue Projekte innerhalb des ALADIN-Frameworks. Durch unsere Arbeit, um neue Sachgebieten der Informatik in ALADIN einzubringen, haben wir gute Grundsteine für eine Weiterentwicklung gelegt. Mit dem intensiven Auseinandersetzen bieten sich uns aber auch neue Ideen, welche in ALADIN integriert werden können.
