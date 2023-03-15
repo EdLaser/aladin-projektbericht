@@ -1,16 +1,19 @@
-:imagesdir: img
-=  Generierung von zufallsbasierten Molekülen
+:path: chemie/
+:imagesdir: img/
+ifdef::rootpath[]
+:imagesdir: {rootpath}{path}{imagesdir}
+endif::rootpath[]
 
-==  Aufgabenbeschreibung
-
+==  Generierung von zufallsbasierten Molekülen
+===  Aufgabenbeschreibung
 Die Aufgabe war es einen Algorithmus zu entwickeln, der zufällige Atome aus dem Periodensystem auswählt und diese unter Einhaltung der chemischen Regeln miteinander verbindet, so dass am Ende ein Molekül entsteht, das aus zufälligen Atomen besteht. Das endgültige Ziel ist dabei, diese Moleküle in Aufgaben für Studierende zu integrieren. Diese Aufgaben könnten dann zum Beispiel sein: Ein Teil des Moleküls wird entfernt und die Studierenden müssen den fehlenden Teil ergänzen oder es ist ein Molekül gegeben und dazu soll der Name angegeben werden.
 
-===  Einschränkungen der Regeln
+====  Einschränkungen der Regeln
 
 Mir wurde relativ zeitig bewusst, dass die vorhandene Zeit für die Entwicklung eines so komplexen Algorithmus nicht ausreichen wird. Deshalb haben wir (Professor & Ich) uns auf ausgewählte Regeln geeinigt. Der Algorithmus soll vorerst mit Kohlenstoff, Wasserstoff und Sauerstoff Atomen arbeiten. Von diesen drei Atomen wird, sobald ein Atom generiert wird, eins zuällig ausgewählt. Die Wahrscheinlichkeiten für die Generierung eines bestimmten Atoms sind dabei unterscheidlich, da sie in der Realität unterschiedlich oft vorkommen. Die Anzahl der vorliegenden Bindungen zwischen den einzelnen Atomen sollen zufällig sein. Dies geschieht unter Einhaltung der Valenz. Die in dem Algorithmus auch das Hauptkriterium bildet, denn am Ende soll ein Molekül generiert werden, dass keine offenen Bindungen mehr aufweist.
 
 
-==  Umsetzung
+===  Umsetzung
 
 Bei der Umsetzung des Algorithmus habe ich auf die Sprache Python gesetzt. Unter Verwendung von Visual Studio Code mit Jupyter Notebook und Google Colab habe ich ihn entwickelt. 
 Als erstes habe ich die Klasse 'Atom' erstellt mit allen Attributen die gebraucht werden, z.B. Valenz und Formel. Zusätzlich sind die Nachbar Atome eines Atoms in einem Dictionary gespeichert. Dazu gibt es noch die drei Unterklassen der jeweiligen Atome, die eine Instanz der Superklasse (Atom) mit den passenden Werten erzeugen. Zusätzlich habe ich die Funktionen mit denen man die Valenz _'getValenz()'_ und auch die Anzahl der freien Bindungen _'getAnzahlfreierBindungen()'_ eines Atoms ausgegeben bekommt implementiert. Dazu kommen die beiden Funktionen mit denen Nachbarn hinzugefügt und entfernt werden können, damit diese in dem Dictionary des jeweiligen Nachbarn gespeichert oder entfernt werden können.
@@ -96,7 +99,7 @@ image:full_atom_3d.png[title="Volles Atom 3D-Ansicht"]
 
 
 
-==  Probleme
+===  Probleme
 Der Algorithmus kann zufallsbasierte Moleküle berechnen und darstellen. Doch manchmal ergeben sich dabei bestimmte Molekülstrukturen, die es theoretisch geben könnte aber dennoch in der Realität nicht existieren. Diese lassen sich dann nicht darstellen und führen zu einem Error. Deshalb gibt es eine Variable die diese Errors mitzählt und am Ende die Anzahl der nicht gültig generierten Moleküle ausgibt.
 Zusätzlich wird der Name und die Formel nur aus der PubChem Datenbank abgerufen und wenn das Molekül dort nicht existiert, dann wird beides nicht ausgegeben. Je größer das Molekül ist desto unwahrscheinlicher ist es, dass der Name und die Formel in der Datenbank vorhanden ist. Genauso ist es bei der Generierung von nicht gültigen Molekülen: je größer desto wahrscheinlicher, dass es nicht gültig ist.
 
@@ -108,7 +111,7 @@ x-Achse: Anzahl Atome
 image:Probleme.png[title="Probleme des Algorithmus"]
 
 
-== Ausblick
+=== Ausblick
 Der Algorithmus wurde in seiner Funktion durch die vorher festgelegten Einschränkungen sehr begrenzt, in Zukunft könnten aber noch weitere Regeln implementiert werden, so dass am Ende mit allen Atomen des Periodensystems gearbeitet werden könnte. Auch die Generierung von ungültigen Atomen liese sich durch implementieren von weiteren Regeln umsetzen, denn man müsse lediglich herausfinden in welcher Struktur gewisse Atome nicht in Verbindung mit anderen Atomen existieren könnnen und diese Möglichkeiten excludieren.
 Zusätzlich zieht sich der Algorithmus die Formel und den Namen der Moleküle aus der PubChem Datenbank, dabei treten einige Probleme auf, die ich vorher schon genannt habe. Dies liese sich auch mit einer einzigen Funktion beheben, die beides von selber ausrechnet, da Atome oft in verschiedenen Gruppen auftreten und aus diesen Gruppen der Name sowie die Formel abgeleitet werden könnte. Außerdem ist das erst der Grundbaustein für automatisierte Generierung von Chemie Aufgaben für Studierende.
 

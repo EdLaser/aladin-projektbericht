@@ -1,14 +1,21 @@
-:source-highlighter: rouge
-:imagesdir: img
+:path: sortieralgorithmen/
+:imagesdir: img/
+ifdef::rootpath[]
+:imagesdir: {rootpath}{path}{imagesdir}
+endif::rootpath[]
+
 == Sortieralgorithmen
 
 === Aufgabenbeschreibung
-==== Generelle Aufgabenstellung
-Im Rahmen des Aufgabenbereichs der Sortieralgorithmen wurde eine Anwendung entwickelt, die einen Übungs- und Prüfungsmodus zum Sortieren von Feldern mittels Sortieralgorithmen bereitstellt. Studierende haben die Möglichkeit, beliebige Felder mit unterschiedlichen Längen zu generieren und diese anschließend mit verschiedenen Sortieralgorithmen zu sortieren. Dabei können sowohl numerische als auch alphanumerische Felder generiert werden, wobei letztere aus einem selbst angelegten deutschen Substantiv-Dictionary stammen.
+==== Aufgabenstellung
+Die Aufgabe zum Thema Sortieralgorithmen besteht darin, eine Anwendung zu entwickeln, mit welcher es Studierenden möglich ist, den Ablauf von Sortieralgorithmen zu verstehen und zu üben.
+Es soll ein Generator erschaffen werden, welcher beliebig viele Aufgaben generiert, eine Möglichkeit zur Lösung durch den Studierenden anbietet und auch in der Lage ist, diese Lösung auszuwerten.
 
-Die generierten Felder können sowohl aufsteigend als auch absteigend sortiert werden und die Sortieralgorithmen Bubblesort, Insertsort, Mergesort und Quicksort stehen zur Verfügung. Die Anwendung ermöglicht es den Studierenden, sich die notwendigen Sortierschritte anzeigen zu lassen. Zusätzlich können die Studierenden die Felder selbst sortieren und eine Auswertung erhalten. Es gibt zwei verschiedene Modi, in denen die selbstständige Sortierung der Felder möglich ist: einen Übungsmodus mit Hilfestellungen und einen Prüfungsmodus ohne Hilfestellung.
+Die verwendeten Technologien und Frameworks zur Entwicklung der Anwendung sind frei zu wählen.
 
-Bei der Auswertung erhalten die Studierenden eine Gesamtpunktzahl basierend auf den korrekten Sortierschritten. Jede Aufgabe hat dabei dieselbe Höchstpunktzahl, um Lösungen vergleichbar zu machen. Die Anwendung erlaubt es, ein generiertes Feld mit mehreren Sortieralgorithmen zu sortieren, um einen Vergleich zwischen den verschiedenen Algorithmen zu ermöglichen.
+Nach ersten Überlegungen und Absprachen in den wöchentlichen Teammeetings ließ sich die Aufgabe spezifizieren: Die Anwendung soll es dem Nutzer durch die Eingabe von verschiedenen Parametern ermöglichen, ein numerisches oder alphanumerisches Feld beliebiger Länge zu erzeugen und dieses dann mit den Sortieralgorithmen Bubblesort, Insertsort, Quicksort und Mergesort zu sortieren.
+
+Es soll möglich sein, sich die einzelnen Schritte anzeigen zu lassen und das Feld mit und ohne Hilfestellung eigenständig zu sortieren.
 
 ==== Anforderungen
 Basierend auf der Aufgabenstellung ergeben sich die folgenden Anforderungen an die Anwendung:
@@ -22,6 +29,12 @@ Basierend auf der Aufgabenstellung ergeben sich die folgenden Anforderungen an d
 
 
 === Technische Umsetzung
+Im Rahmen des Aufgabenbereichs der Sortieralgorithmen wurde eine Anwendung entwickelt, die einen Übungs- und Prüfungsmodus zum Sortieren von Feldern mittels Sortieralgorithmen bereitstellt. Studierende haben die Möglichkeit, beliebige Felder mit unterschiedlichen Längen zu generieren und diese anschließend mit verschiedenen Sortieralgorithmen zu sortieren. Dabei können sowohl numerische als auch alphanumerische Felder generiert werden, wobei letztere aus einem selbst angelegten deutschen Substantiv-Dictionary stammen.
+
+Die generierten Felder können sowohl aufsteigend als auch absteigend sortiert werden und die Sortieralgorithmen Bubblesort, Insertsort, Mergesort und Quicksort stehen zur Verfügung. Die Anwendung ermöglicht es den Studierenden, sich die notwendigen Sortierschritte anzeigen zu lassen. Zusätzlich können die Studierenden die Felder selbst sortieren und eine Auswertung erhalten. Es gibt zwei verschiedene Modi, in denen die selbstständige Sortierung der Felder möglich ist: einen Übungsmodus mit Hilfestellungen und einen Prüfungsmodus ohne Hilfestellung.
+
+Bei der Auswertung erhalten die Studierenden eine Gesamtpunktzahl basierend auf den korrekten Sortierschritten. Jede Aufgabe hat dabei dieselbe Höchstpunktzahl, um Lösungen vergleichbar zu machen. Die Anwendung erlaubt es, ein generiertes Feld mit mehreren Sortieralgorithmen zu sortieren, um einen Vergleich zwischen den verschiedenen Algorithmen zu ermöglichen.
+
 ==== Generelles Vorgehen
 Vor dem Start der tatsächlichen Entwicklung habe ich passende Technologien gesucht, um die Aufgabenstellung umzusetzen. Da ich bereits Programmierkenntnisse in Java hatte, habe ich mich dafür entschieden, Java im Backend zu verwenden und eine Konsolenanwendung zu entwickeln. Zur Umsetzung des Frontends habe ich Vaadin ausgewählt, ein Java-basiertes Webframework mit vorgefertigten UI-Komponenten. Dadurch konnte ich meine Konsolenanwendung in eine Vaadin-Anwendung überführen und die vorgefertigten Komponenten zur Ausgabe nutzen.
 
@@ -330,3 +343,4 @@ Es muss eine Möglichkeit gefunden werden, sodass der Nutzer das generierte Feld
 Die Auswertung funktioniert zurzeit statisch. Macht der Nutzer einen Fehler in den ersten Schritten, sind die folgenden in der Regel auch falsch. Bei der Auswertung muss das System, sobald ein Fehler auftritt, wieder in den Algorithmus springen und an gegebener Stelle neu sortieren.
 
 _Hinweis_: Hierfür müssen die Sortieralgorithmen neu entwickelt werden, sodass es möglich ist, an jedem beliebigen Stand in den Algorithmus einzusteigen. Erste Algorithmen dafür liegen vor, sind aber nicht in die finale Anwendung integriert. Hierfür hat die Zeit nicht gereicht.
+

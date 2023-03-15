@@ -685,3 +685,4 @@ Hierbei ist es möglich, sich von den klassischen Textaufgaben loszulösen.
 
 ==== Upload einer Konfiguration
 Grundlegend ist eine Komponente im Frontend enthalten, welche in Zukunft den Upload einer eigenen Konfiguration an Gesetzen sowie Sachverhalten ermöglichen kann. Dazu fehlt noch der Upload der Konfiguration auf den Server / das Backend, sowie das folgende Laden der Aufgaben in die Auswahl.
+

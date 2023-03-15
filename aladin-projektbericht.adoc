@@ -7,7 +7,6 @@ endif::rootpath[]
 
 = Projektbericht Aladin
 
-// ToDo: mit Inhalt füllen
 == Einleitung
 === Problemerläuterung 
 
@@ -77,13 +76,13 @@ Doch auch fachlich hat sich das Projektseminar ausgezahlt, so konnte ich tief in
 Besonders gut hat mir die wöchentliche Vorstellungs- und Austauschrunde gefallen. Hier konnte man seine Probleme präsentieren und von den Erfahrungen der anderen Teilnehmer profitieren, was mir persönlich sehr bei der Entwicklung geholfen hat. Außerdem war es immer sehr interessant zu sehen, wie die anderen ihre Aufgaben bewerkstelligten und welche Technologien dabei zum Einsatz kamen. Bemerkenswert fand ich die Verwendung des Sprachmodells bei Ruben, mit welchem er seien Aufgabenstellung generieren lässt. Dabei wurde mir klar, wie vielseitig die KI jetzt schon eingesetzt werden kann und wie man selbst diese in eigene Projekte integrieren könnte. Spannend fand ich auch die Entwicklung des Algorithmus für die EPK-Generierung und wie damit nun Geschäftsprozesse generiert werden können.
 
 === Dustin Doege
-Zusammenfassend kann ich sagen, dass ich mit dem erreichten Stand der Software zufrieden bin, obwohl nicht alle Anforderungen zu 100% erfüllt wurden. Während des Projekts habe ich viel Zeit investiert, viele neue Methoden und Patterns kennengelernt und mein Wissen im Bereich der Softwareentwicklung erweitert.
+Zusammenfassend kann ich sagen, dass ich mit dem erreichten Stand der Software zufrieden bin, obwohl nicht alle Anforderungen zu 100% erfüllt wurden. Während des Projekts habe ich viel Zeit investiert, viele neue Methoden kennengelernt und mein Wissen im Bereich der Softwareentwicklung erweitert.
 
-Insbesondere in der Java-Programmierung habe ich große Fortschritte gemacht, auch wenn ich im Rückblick einige Funktionen oder Klassen anders umsetzen würde. Ich bin auch mit dem Vaadin-Framework vertraut geworden, welches mir zu Beginn des Projekts noch fremd war, und werde dessen Verwendung in meiner zukünftigen beruflichen Laufbahn berücksichtigen.
+Insbesondere in der Java-Programmierung habe ich große Fortschritte gemacht, auch wenn ich im Rückblick einige Features anders umsetzen würde. Ich bin auch mit dem Vaadin-Framework vertraut geworden, welches mir zu Beginn des Projekts noch fremd war, und werde dessen Verwendung in meiner zukünftigen beruflichen Laufbahn berücksichtigen.
 
 Ich habe die wöchentlichen Meetings genossen, da sie mir geholfen haben, meine Anwendung weiterzuentwickeln und man stetig neue Dinge gelernt hat. Es war interessant zu sehen, was meine Kommilitonen im Verlauf des Projekts erreicht haben. Allerdings hätte ich mir gewünscht, dass die Teamarbeit in diesem Projekt stärker betont worden wäre.
 
-Ich bin dankbar für die Zeit im Projekt und gehe mit vielem Erlernten und neuer Erfahrungen aus diesem Projekt.
+Ich bin dankbar für die Zeit im Projektseminar und gehe mit vielen neuen Kenntnissen und Erfahrungen aus diesem Projekt.
 
 === Philip Poplutz
 Bei der Arbeit am ALADIN Projekt habe ich einiges an Kenntnissen dazugewonnen. Am Anfang war ich von der Aufgabe überwältigt, aber durch die wöchentlichen Meetings und die kleinen Ziele, die ich mir jede Woche gesetzt habe, gelang mir das Arbeiten immer strukturierter, schneller und einfacher. Es war mein erstes Code-Projekt in dieser Größenordnung, weswegen ich rückblickend einiges anders gemacht hätte, aber ich bin dennoch zufrieden mit dem Ergebnis. Zusätzlich war es mein erstes Projekt mit Python. Beim Lernprozess habe ich festgestellt, dass Python eine Sprache ist, die ich mir sehr gut selbst beibringen kann. Python zu lernen ist ein wichtiger Schritt für meine Zukunft gewesen und ich werde ab jetzt weiter an Python-Projekten arbeiten.
