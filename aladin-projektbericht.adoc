@@ -26,7 +26,7 @@ Lassen sich die Aufgabentypen ohne Weiteres umsetzen oder sind sie gegebenenfall
 Handelt es sich eventuell um NP-Vollständige Probleme?
 . Algorithmen entwickeln
 +
-Es sollen Algorithmen entwickelte werden, die zur Umsetzung des Aufgabentyps benötigt werden. 
+Es sollen Algorithmen entwickelt werden, die zur Umsetzung des Aufgabentyps benötigt werden.
 . Erzeugen und Extrahieren benötigter Daten
 +
 Welche Daten benötigt der Algorithmus, um vielfältige Aufgaben zu generieren?
