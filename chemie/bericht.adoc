@@ -13,10 +13,10 @@ Mir wurde relativ zeitig bewusst, dass die vorhandene Zeit für die Entwicklung 
 ==  Umsetzung
 
 Bei der Umsetzung des Algorithmus habe ich auf die Sprache Python gesetzt. Unter Verwendung von Visual Studio Code mit Jupyter Notebook und Google Colab habe ich ihn entwickelt. 
-Als erstes habe ich die Klasse 'Atom' erstellt mit allen Attributen die gebraucht werden, z.B. Valenz und Formel. Zusätzlich sind die Nachbar Atome eines Atoms in einem Dictionary gespeichert. Dazu gibt es noch die drei Unterklassen der jeweiligen Atome, die eine Instanz der Superklasse (Atom) mit den passenden Werten erzeugen. Zusätzlich habe ich die Funktionen mit denen man die Valenz _'getValenz()'_ und auch die Anzahl der freien Bindungen _'getAnzahlfreierBindungen()_' eines Atoms ausgegeben bekommt implementiert. Dazu kommen die beiden Funktionen mit denen Nachbarn hinzugefügt und entfernt werden können, damit diese in dem Dictionary des jeweiligen Nachbarn gespeichert oder entfernt werden können.
+Als erstes habe ich die Klasse 'Atom' erstellt mit allen Attributen die gebraucht werden, z.B. Valenz und Formel. Zusätzlich sind die Nachbar Atome eines Atoms in einem Dictionary gespeichert. Dazu gibt es noch die drei Unterklassen der jeweiligen Atome, die eine Instanz der Superklasse (Atom) mit den passenden Werten erzeugen. Zusätzlich habe ich die Funktionen mit denen man die Valenz _'getValenz()'_ und auch die Anzahl der freien Bindungen _'getAnzahlfreierBindungen()'_ eines Atoms ausgegeben bekommt implementiert. Dazu kommen die beiden Funktionen mit denen Nachbarn hinzugefügt und entfernt werden können, damit diese in dem Dictionary des jeweiligen Nachbarn gespeichert oder entfernt werden können.
 
 Der Nutzer kann am Anfang eingeben wie viele Atome ein Molekül enthalten soll (Variable: n) und wie viele Moleküle der Alogrithmus berechnen und ausgeben soll.
-Das Molekül ist am Anfang ein leerer Array (M). Danach wird durch die Funktion 'choose_atom()' zufällig eine Instanz aus den Klassen Kohlenstoff, Sauerstoff und Wassserstoff initiiert  (Variable: a). Da die Atome unterschiedlich oft in der Realität vorkommen habe ich die Wahrscheinlichkeiten in der Funktion wie folgt realisiert: Kohlenstoff 50%, Wasserstoff und Sauerstoff jeweils 25%. Daraufhin wird a zu M hinzugefügt. Nun besteht das Molekül theoretisch aus einem Atom. +
+Das Molekül ist am Anfang ein leerer Array (M). Danach wird durch die Funktion _'choose_atom()'_ zufällig eine Instanz aus den Klassen Kohlenstoff, Sauerstoff und Wassserstoff initiiert  (Variable: a). Da die Atome unterschiedlich oft in der Realität vorkommen habe ich die Wahrscheinlichkeiten in der Funktion wie folgt realisiert: Kohlenstoff 50%, Wasserstoff und Sauerstoff jeweils 25%. Daraufhin wird a zu M hinzugefügt. Nun besteht das Molekül theoretisch aus einem Atom. +
 
 Die Bilder stellen eine beispielhafte vorgehensweise des Algorithmus in der 2D-Ansicht dar, wenn für die Anzahl der Atome 5 eingegeben wurde.
 
@@ -45,7 +45,8 @@ image:remove_one_bond.png[title="Eine Bindung wurde entfernt"]
 
 image:remove_all_bonds.png[title="Alle Bindungen wurden entfernt"]
 
-image:replace_atom.png[title="Alle Bindungen wurden entfernt"]
+image:replace_atom.png[title="Alle Bindungen wurden entfernt"] +
+
 _Anmerkung: C Atome werden nicht als C in der 2D-Ansicht geschrieben_
 
 Dann würde das Atom, welches ursprünglich nur zu einem Atom verbunden war aus dem Molekül entfernt werden. Hier beginnt die Schleife (Solange M < n) von vorn: Es wird wieder eine Instanz der Klasse C,H oder O erzeugt und über k Bindungen mit einem zufällig ausgewählten Atom verbunden..
@@ -60,7 +61,7 @@ image:five_atoms.png[title="Alle 5 Atome, aber noch freie Bindungen"]
 
 Diese müssen jetzt noch befriedigt werden.
 
-Dabei geht der Algorithmus wie folgt vor: Es werden alle Atome mit freien Bindungen in einem Array gespeichert. Dazu wird zufällig ein Atom aus dem Array ausgewählt und in einem anderen Array alle Nachbarn des ausgewählten Atoms (welches freie Bindungen aufweist) gespeichert. Zwischen dem ausgewählten Atom und einem zufällig ausgewählten Nachbarn werden jetzt die Bindungen (um das Minimum von den freien Bindungen beider Atome) erhöht. Die geschieht in der Funktion 'bindungen_erhöhen'.
+Dabei geht der Algorithmus wie folgt vor: Es werden alle Atome mit freien Bindungen in einem Array gespeichert. Dazu wird zufällig ein Atom aus dem Array ausgewählt und in einem anderen Array alle Nachbarn des ausgewählten Atoms (welches freie Bindungen aufweist) gespeichert. Zwischen dem ausgewählten Atom und einem zufällig ausgewählten Nachbarn werden jetzt die Bindungen (um das Minimum von den freien Bindungen beider Atome) erhöht. Die geschieht in der Funktion _'bindungen_erhöhen'_.
 
 Wieder ein kurzes Beispiel: Ausgewähltes Atom hat 2 freie Bindungen und ausgewählter Nachbar hat 3 freie Bindungen -> Bindungen zwischen beiden werden um 2 erhöht.
 
@@ -71,11 +72,11 @@ d wird wie folgt berechnet:
 
 d = (Valenz von a) - (freie Bindungen von a)
 
-Wenn die Zahl d der Valenz von Kohlenstoff oder Sauerstoff entspricht dann wird die Funktion atom_ersetzen() mit dem Namen des passenden Atoms als Prameter aufgerufen.
+Wenn die Zahl d der Valenz von Kohlenstoff oder Sauerstoff entspricht dann wird die Funktion _'atom_ersetzen()'_' mit dem Namen des passenden Atoms als Prameter aufgerufen.
 
 Dabei wird eine Instanz von dem passenden Atom erzeugt. Von dem zu ersetzendem Atom werden alle Nachbarn mit ihren Bindungen gespeichert und auf die neue Instanz übertragen. Das ausgewählte Atom wird dann aus dem Molekül entfernt und das neue nimmt seinen Platz ein.
 
-Wenn d nicht zu einer Valenz der zwei Atome passt dann gibt es folgende "Notlösung": Es werden d Wasserstoffatome an das ausgewählte Atom angehangen dies wird durch die Funktion '_wasserstoff_anhängen()_' realisiert.
+Wenn d nicht zu einer Valenz der zwei Atome passt dann gibt es folgende "Notlösung": Es werden d Wasserstoffatome an das ausgewählte Atom angehangen dies wird durch die Funktion _'wasserstoff_anhängen()'_ realisiert.
 
 *Wasserstoffmoleküle anhängen*
 
@@ -85,10 +86,13 @@ Nun hat der Algorithmus ein Molekül erzeugt, dass keine freien Bindungen mehr a
 
 Für die Darstellung habe ich folgende Python-Bibliotheken verwendet: PubChemPy, RDKit und Py3Dmol
 
-Für die Ausgabe wird als erstes der SMILES Code (Darstellung des Moleküls als ASCII Code) zu dem erzeugten Molekül in der Funktion '_SMILES_Code()_' berechnet. Dazu habe ich folgendes als Hilfe genutzt: https://stackoverflow.com/questions/51195392/smiles-from-graph dies ermöglicht es einen SMILES Code von einem Graphen zu berechnen, deswegen wird in der Funktion 'create_adjacency_matrix()' das Molekül als Adjazenzmatrix dargestellt und dann an die Funktion 'MolFromGraphs()' weitergegeben. Mit dem Ergebnis von 'MolFromGraphs()' als Parameter für die RDKit-Bibliothek vorgegebe Funktion 'Chem.MolToSmiles ()' wird jetzt der SMILES Code berechnet. Der SMILES Code wird nun in Verbindung mit der PubChemPy Bibliothek genutzt. In der Funktion '_get_from_PubChem()_' wird nun die Datenbank nach dem SMILES Code abgesucht und dadurch kann der Name und die Formel des Moleküls ausgegeben werden. Zusätzlich wird die Anzahl der nicht gültigen Moleküle ausgegeben, dazu aber mehr im Punkt *Probleme*. +
-Als letztes erfolgt die Ausgabe der 3D-Ansicht des Moleküls durch die FUnktion '_show()_'. Der Funktion wird der SMILES Code als Parameter übergeben. py3Dmol stellt hier einige Funktionen bereit mit denen Einstellungen an der 3D-Ansicht vorgenommen werden können. z.B. '_view()_' mit der ich die Größe der Ausgabe auf 600x600 beschränkt habe.
+Für die Ausgabe wird als erstes der SMILES Code (Darstellung des Moleküls als ASCII Code) zu dem erzeugten Molekül in der Funktion _'SMILES_Code()'_ berechnet. Dazu habe ich folgendes als Hilfe genutzt: https://stackoverflow.com/questions/51195392/smiles-from-graph dies ermöglicht es einen SMILES Code von einem Graphen zu berechnen, deswegen wird in der Funktion _'create_adjacency_matrix()'_ das Molekül als Adjazenzmatrix dargestellt und dann an die Funktion _'MolFromGraphs()'_ weitergegeben. Mit dem Ergebnis von _'MolFromGraphs()'_ als Parameter für die RDKit-Bibliothek vorgegebe Funktion _'Chem.MolToSmiles ()'_ wird jetzt der SMILES Code berechnet. Der SMILES Code wird nun in Verbindung mit der PubChemPy Bibliothek genutzt. In der Funktion _'get_from_PubChem()'_ wird nun die Datenbank nach dem SMILES Code abgesucht und dadurch kann der Name und die Formel des Moleküls ausgegeben werden. Zusätzlich wird die Anzahl der nicht gültigen Moleküle ausgegeben, dazu aber mehr im Punkt *Probleme*. +
+Als letztes erfolgt die Ausgabe der 3D-Ansicht des Moleküls durch die FUnktion _'show()'_. Der Funktion wird der SMILES Code als Parameter übergeben. py3Dmol stellt hier einige Funktionen bereit mit denen Einstellungen an der 3D-Ansicht vorgenommen werden können. z.B. _'view()'_ mit der ich die Größe der Ausgabe auf 600x600 beschränkt habe.
 
-*3D-Ansicht hier einfügen*
+
+*Beispiel 3D-Ansicht für penta-1,4-diyne*
+
+image:full_atom_3d.png[title="Volles Atom 3D-Ansicht"]
 
 
 
