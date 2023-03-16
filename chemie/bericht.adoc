@@ -40,7 +40,7 @@ Danach wird b auch zu M hinzugefügt. Nun befinden sich schon zwei Atome im Mole
 image:second_atom.png[title="Zweites Atom"]
 
 Diese können aber trotzdem noch freie Bindungen aufweisen.
-Im nächsten Schritt wird geschaut, ob beide Fälle gleichzeitig eintreffen: Die Anzahl der Atome im Molekül ist kleiner als die gewünschte Anzahl und kein Atom aus M weißt freie Bindungen auf. In dem Fall könnte kein neues Atom mehr hinzugefügt werden, da kein Atom mehr weitere Bindungen eingehen kann (Bild stellt dieses Szenario dar). Nun werden vorhandene Bindungen gelöst. Es wird ein Atom ausgewählt, dass nur mit genau einem anderen Atom verbunden ist. Zwischen diesen beiden Atomen werden dann (Zufallszahl zwischen 0 und vorhandenen Bindungen(k)) gelöst. Dabei kann es passieren, dass zufällig alle Bindungen zwischen den Atomen entfernt werden. 
+Im nächsten Schritt wird geschaut, ob beide Fälle gleichzeitig eintreffen: Die Anzahl der Atome im Molekül ist kleiner als die gewünschte Anzahl und kein Atom aus M weißt freie Bindungen auf. In dem Fall könnte kein neues Atom mehr hinzugefügt werden, da kein Atom mehr weitere Bindungen eingehen kann (Bild stellt dieses Szenario dar). Nun werden vorhandene Bindungen gelöst. Es wird ein Atom ausgewählt, dass nur mit genau einem anderen Atom verbunden ist. Zwischen diesen beiden Atomen werden dann (Zufallszahl zwischen 1 und vorhandenen Bindungen(k)) gelöst. Dabei kann es passieren, dass zufällig alle Bindungen zwischen den Atomen entfernt werden. 
 
 *Beispiel: Eine Bindung wird entfernt*
 
