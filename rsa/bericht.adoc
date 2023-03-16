@@ -37,6 +37,7 @@ image::example_exercise.png[pdfwidth=350px, width=350px, scaledwidth=350px]
 
 <<<
 === Umsetzung
+Im Nachfolgenden möchte ich kurz auf ein paar wichtige Punkte der Umsetzung eingehen.
 
 ==== Projektverlauf
 
